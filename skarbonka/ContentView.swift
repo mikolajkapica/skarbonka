@@ -1,57 +1,124 @@
-//
-//  ContentView.swift
-//  skarbonka
-//
-//  Created by stud on 29/10/2024.
-//
-
 import SwiftUI
-import SwiftData
+
+enum Tab {
+    case home
+    case search
+    case profile
+}
+
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @State private var selectedTab: Tab = .home
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        VStack {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("Home")
                     }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                    .tag(Tab.home)
+
+                SearchView()
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
                     }
-                }
+                    .tag(Tab.search)
+
+                ProfileView()
+                    .tabItem {
+                        Image(systemName: "person.fill")
+                        Text("Profile")
+                    }
+                    .tag(Tab.profile)
             }
-        } detail: {
-            Text("Select an item")
         }
+        .fontDesign(.rounded)
+    }
+}
+
+struct HomeView: View {
+    var body: some View {
+        VStack {
+            TopBar(title: "Home")
+            Text("Twoje cele oszczędnościowe")
+            Button(action:  {}) {
+                Text("Dodaj nowy cel")
+            }
+            block()
+        }
+        
+    }
+}
+
+struct block: View {
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.indigo.gradient)
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Bilet do energylandii")
+                        Text("80 z 130 zł")
+                        
+                    }
+                    Spacer()
+                    Image(systemName: "ticket")
+                }
+                Text("Dodaj do skarbonki:")
+                HStack {
+                    Text("10 zł 💰")
+                    Text("za 3 tyg. 📅")
+                }
+                Button(action: {}){
+                    Text("Odkładam pieniądze")
+                }
+
+            }
+            .foregroundColor(.white)
+
+        }
+        .padding()
+        .fontWeight(.bold)
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+}
+    
+
+struct SearchView: View {
+    var body: some View {
+        VStack {
+            TopBar(title: "Search")
+            Spacer()
         }
     }
+}
 
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
+struct ProfileView: View {
+    var body: some View {
+        VStack {
+            TopBar(title: "Profile")
+            Spacer()
         }
+    }
+}
+
+struct TopBar: View {
+    var title: String
+    
+    var body: some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Image(systemName: "bell")
+        }
+        .padding(16)
+        .background(Color.white)
+        .shadow(radius: 1)
     }
 }
 
