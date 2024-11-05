@@ -1,0 +1,53 @@
+{
+  "sourceLanguage" : "pl",
+  "strings" : {
+    "10 zł 💰" : {
+
+    },
+    "80 z 130 zł" : {
+
+    },
+    "addToSkarbonka" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "add to skarbonka 222"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dodaj do skarbonki"
+          }
+        }
+      }
+    },
+    "Bilet do energylandii" : {
+
+    },
+    "Dodaj nowy cel" : {
+
+    },
+    "Home" : {
+
+    },
+    "Odkładam pieniądze" : {
+
+    },
+    "Profile" : {
+
+    },
+    "Search" : {
+
+    },
+    "Twoje cele oszczędnościowe" : {
+
+    },
+    "za 3 tyg. 📅" : {
+
+    }
+  },
+  "version" : "1.0"
+}
