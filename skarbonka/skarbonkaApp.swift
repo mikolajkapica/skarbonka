@@ -22,13 +22,30 @@ struct skarbonkaApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    @UIApplicationDelegateAdaptor(AppDelegete.self) var appDelagete
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .fontDesign(.rounded)
+            ZStack {
+                Color.black.edgesIgnoringSafeArea(.all)
+                ContentView()
+                    .fontDesign(.rounded)
+
+            }
         }
         .environment(\.font, .system(.body, design: .rounded))
         .modelContainer(sharedModelContainer)
+    }
+}
+
+final class AppDelegete: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if let window = application.windows.first {
+                window.backgroundColor = .systemPurple
+            }
+        }
+        return true
     }
 }
