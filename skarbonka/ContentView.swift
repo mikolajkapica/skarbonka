@@ -60,7 +60,6 @@ struct TopBar: View {
         }
         .padding(16)
         .background(Color.white)
-        .shadow(radius: 1)
     }
 }
 
