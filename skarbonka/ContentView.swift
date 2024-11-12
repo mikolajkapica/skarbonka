@@ -17,32 +17,36 @@ struct ContentView: View {
 struct Navigation: View {
     @State private var selectedTab: Tab = .home
     
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = UIColor.white
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
+    
     var body: some View {
-        VStack {
-            TabView(selection: $selectedTab) {
-                HomeView()
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Home")
-                    }
-                    .tag(Tab.home)
+        TabView(selection: $selectedTab) {
+            HomeView()
+                .tabItem {
+                    Image(systemName: "creditcard")
+                    Text(String(localized: "Savings"))
+                }
+                .tag(Tab.home)
 
-                SearchView()
-                    .tabItem {
-                        Image(systemName: "magnifyingglass")
-                        Text("Search")
-                    }
-                    .tag(Tab.search)
+            SearchView()
+                .tabItem {
+                    Image(systemName: "play")
+                    Text(String("Games"))
+                }
+                .tag(Tab.search)
 
-                ProfileView()
-                    .tabItem {
-                        Image(systemName: "person.fill")
-                        Text("Profile")
-                    }
-                    .tag(Tab.profile)
-            }
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text(String("Profile"))
+                }
+                .tag(Tab.profile)
         }
-        .fontDesign(.rounded)
     }
 }
 
@@ -59,6 +63,7 @@ struct TopBar: View {
             Image(systemName: "bell")
         }
         .padding(16)
+        .contentMargins(0)
         .background(Color.white)
     }
 }

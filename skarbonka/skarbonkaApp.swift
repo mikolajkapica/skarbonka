@@ -26,6 +26,7 @@ struct skarbonkaApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .fontDesign(.rounded)
         }
         .environment(\.font, .system(.body, design: .rounded))
         .modelContainer(sharedModelContainer)

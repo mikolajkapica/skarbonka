@@ -28,8 +28,8 @@ enum TextSize {
 }
 
 extension Text {
-    func withSize(_ style: TextSize) -> some View {
-        return self.font(style.fontSize)
+    func withSize(_ textSize: TextSize) -> some View {
+        return self.font(textSize.fontSize)
     }
 }
 
@@ -38,54 +38,38 @@ enum ButtonStyle {
     case filled
     case muted
     case border
+    case none
     
     var backgroundColor: Color {
         switch self {
         case .filled: .orange
         case .muted: .orange.mix(with: Color.gray, by: 0.3)
         case .border: .clear
+        case .none: .clear
+        }
+    }
+    
+    var border: some View {
+        switch self {
+        case .filled: AnyView(EmptyView())
+        case .muted: AnyView(EmptyView())
+        case .border: AnyView(RoundedRectangle(cornerRadius: .infinity).stroke(Color.white, lineWidth: 2))
+        case .none: AnyView(EmptyView())
         }
     }
 }
 
-struct BorderModifier: ViewModifier {
-    var borderStyle: ButtonStyle
-    var borderColor: Color = .orange // Default border color
-    var borderWidth: CGFloat = 2 // Default border width
-    
-    private func getBorder() -> some View {
-        switch style {
-        case .filled:
-            return AnyView(EmptyView()) // No border for the 'filled' style
-        case .muted:
-            return AnyView(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 2))
-        case .border:
-            return AnyView(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2))
-        }
-    }
-    
-    func body(content: Content) -> some View {
-        switch borderStyle {
-        case .filled: AnyView(content)
-        case .muted: AnyView(content)
-        case .border: AnyView(content).overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.blue, lineWidth: 2)
-            )
-        }
-    }
-}
+
 
 extension Button {
     func style(_ style: ButtonStyle) -> some View {
         self
             .frame(maxWidth: .infinity)
             .padding()
-            .background(.orange)
+            .background(style.backgroundColor)
             .foregroundStyle(.white)
-            .cornerRadius(100)
-            .borde
-            .padding()
+            .cornerRadius(.infinity)
+            .overlay(style.border)
     }
 }
 
