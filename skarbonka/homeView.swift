@@ -1,6 +1,95 @@
 import SwiftUI
 
 
+struct HomeView: View {
+    @State private var goalView: Bool = false
+    var body: some View {
+        NavigationView {
+            
+            VStack(spacing: 0) {
+                TopBar(title: "Savings")
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        Text(String(localized: "Your savings goals")).withSize(.xxl)
+                        NavigationLink(String(localized: "Add new goal"), destination: ProfileView()
+                        )
+                        .buttonStyle(SkarbonkaButtonStyle(style: .filled))
+                        goal()
+                        goal()
+                        Spacer()
+                        
+                    }
+                    .padding(.horizontal)
+                    .padding(.top)
+                }
+                .background(Color.purple.gradient)
+            }
+        }
+    }
+    
+    struct NewGoal: View {
+        @State private var goalName: String = ""
+        var body: some View {
+            VStack {
+                TextField("your goal?", text: $goalName)
+            }
+        }
+    }
+}
+
+
+struct goal: View {
+    var body: some View {
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Bilet do energylandii").withSize(.xl)
+                            Text("80 z 130 zł").withSize(.l)
+                        }
+                        Spacer()
+                        GoalIcon()
+                    }
+                
+                    Text(String(localized:"Add to skarbonka")) .withSize(.s)
+                
+                    HStack {
+                        Text("10 zł 💰")
+                        Text("za 3 tyg. 📅")
+                    }
+                
+                    NavigationLink(destination: ProfileView()) {
+                        HStack {
+                            Image(systemName: "creditcard")
+                            Text(String(localized: "Odkładam pieniądze"))
+                        }
+                    }
+                    .style(.filled)
+                    .padding(.bottom)
+                    .padding(.top)
+
+                    
+                    NavigationLink(destination: ProfileView()) {
+                        HStack {
+                            Image(systemName: "arrow.right")
+                            Text(String("See more"))
+
+                        }
+                    }
+                    .style(.border)
+                }
+                .padding()
+                .background(
+                    Rectangle()
+                        .cornerRadius(32)
+                        .foregroundColor(.blue) // Background color of the rectangle
+                )
+                .foregroundColor(.white)
+        }
+
+}
+
+
+
 struct GoalIcon: View {
     let progress: CGFloat = 90
     let size: CGFloat = 100
@@ -24,92 +113,5 @@ struct GoalIcon: View {
                 .clipShape(Circle())
         )
         .frame(width: size, height: size)
-    }
-}
-
-
-struct goal: View {
-    var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("Bilet do energylandii").withSize(.xl)
-                        Text("80 z 130 zł").withSize(.l)
-                    }
-                    Spacer()
-                    GoalIcon()
-                }
-                Text(String(localized:"Add to skarbonka")) .withSize(.s)
-                HStack {
-                    Text("10 zł 💰")
-                    Text("za 3 tyg. 📅")
-                }
-                Button(action: {}){
-                    HStack {
-                        Image(systemName: "creditcard")
-                        Text(String(localized: "Odkładam pieniądze"))
-                    }
-                }
-                .style(.filled)
-                .padding(.bottom)
-                .padding(.top)
-
-                
-                Button(action: {}){
-                    HStack {
-                        Image(systemName: "arrow.right")
-                        Text(String("See more"))
-
-                    }
-                }
-                .style(.border)
-            }
-            .padding()
-            .background(
-                Rectangle()
-                    .cornerRadius(32)
-                    .foregroundColor(.blue) // Background color of the rectangle
-            )
-            .foregroundColor(.white)
-    }
-}
-struct HomeView: View {
-    @State private var showSheet: Bool = false
-    var body: some View {
-        VStack(spacing: 0) {
-            TopBar(title: "Savings")
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    Text(String(localized: "Your savings goals")).withSize(.xxl)
-                    Button(action: {showSheet.toggle()}) {
-                        HStack {
-                            Image(systemName: "plus")
-                            Text(String(localized: "Add new goal"))
-                        }
-                    }
-                    .style(.muted)
-                    .sheet(isPresented: $showSheet) {
-                        NewGoal()
-//                            .interactiveDismissDisabled(true)
-                    }
-                    goal()
-                    goal()
-                    Spacer()
-
-                }
-                .padding(.horizontal)
-                .padding(.top)
-            }
-        }
-        .background(Color.purple.gradient)
-    }
-}
-
-struct NewGoal: View {
-    @State private var goalName: String = ""
-    var body: some View {
-        VStack {
-            TextField("your goal?", text: $goalName)
-        }
     }
 }

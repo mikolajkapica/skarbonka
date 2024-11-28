@@ -34,7 +34,7 @@ extension Text {
 }
 
 
-enum ButtonStyle {
+enum SkarbonkaButtonStyleEnum {
     case filled
     case muted
     case border
@@ -60,10 +60,17 @@ enum ButtonStyle {
 }
 
 
+extension NavigationLink {
+    func style(_ style: SkarbonkaButtonStyleEnum) -> some View {
+        self.buttonStyle(SkarbonkaButtonStyle(style: .filled))
+    }
+}
 
-extension Button {
-    func style(_ style: ButtonStyle) -> some View {
-        self
+struct SkarbonkaButtonStyle: ButtonStyle {
+    let style: SkarbonkaButtonStyleEnum
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
             .frame(maxWidth: .infinity)
             .padding()
             .background(style.backgroundColor)

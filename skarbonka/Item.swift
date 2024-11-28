@@ -1,10 +1,3 @@
-//
-//  Item.swift
-//  skarbonka
-//
-//  Created by stud on 29/10/2024.
-//
-
 import Foundation
 import SwiftData
 

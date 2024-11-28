@@ -4,6 +4,7 @@ enum Tab {
     case home
     case search
     case profile
+    case test
 }
 
 
@@ -49,8 +50,6 @@ struct Navigation: View {
         }
     }
 }
-
-
 
 
 struct TopBar: View {
