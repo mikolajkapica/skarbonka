@@ -1,32 +1,62 @@
 import SwiftUI
 
-
 struct HomeView: View {
     @State private var goalView: Bool = false
-    var body: some View {
+    var goals = [
+        Goal(
+           goalName: "Bilet do EnergyLandii",
+           selectedIcon: "puzzlepiece",
+           productPrice: "129",
+           currentSavings: "77",
+           savingFrequency: "Co tydzień",
+           savingAmount: 11.0,
+           targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!
+       ),
+       Goal(
+           goalName: "Bilet do EnergyLandii",
+           selectedIcon: "puzzlepiece",
+           productPrice: "129",
+           currentSavings: "77",
+           savingFrequency: "Co tydzień",
+           savingAmount: 11.0,
+           targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!
+       ),
+       Goal(
+           goalName: "Bilet do EnergyLandii",
+           selectedIcon: "puzzlepiece",
+           productPrice: "129",
+           currentSavings: "77",
+           savingFrequency: "Co tydzień",
+           savingAmount: 11.0,
+           targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!
+       )
+    ]
+        
+        var body: some View {
         NavigationView {
-            
             VStack(spacing: 0) {
-                TopBar(title: "Savings")
+                TopBar(title: "Savings", isBack: false)
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text(String(localized: "Your savings goals")).withSize(.xxl)
-                        NavigationLink(String(localized: "Add new goal"), destination: ProfileView()
+                    VStack(spacing: 20) {
+                        Text(String(localized: "Your savings goals"))
+                            .font(SkarbonkaTextSize.m.fontSize.bold())
+                            .foregroundColor(.white)
+                        NavigationLink(
+                            String(localized: "Add new goal"),
+                            destination: GoalView()
                         )
                         .buttonStyle(SkarbonkaButtonStyle(style: .filled))
-                        goal()
-                        goal()
-                        Spacer()
-                        
+                        ForEach(goals, id: \.goalName) { goal in
+                            GoalSummary(goal: goal)
+                        }
                     }
-                    .padding(.horizontal)
-                    .padding(.top)
+                    .padding(24)
                 }
-                .background(Color.purple.gradient)
+                .background(SkarbonkaColors.PurpleGradient)
             }
         }
     }
-    
+
     struct NewGoal: View {
         @State private var goalName: String = ""
         var body: some View {
@@ -34,84 +64,5 @@ struct HomeView: View {
                 TextField("your goal?", text: $goalName)
             }
         }
-    }
-}
-
-
-struct goal: View {
-    var body: some View {
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("Bilet do energylandii").withSize(.xl)
-                            Text("80 z 130 zł").withSize(.l)
-                        }
-                        Spacer()
-                        GoalIcon()
-                    }
-                
-                    Text(String(localized:"Add to skarbonka")) .withSize(.s)
-                
-                    HStack {
-                        Text("10 zł 💰")
-                        Text("za 3 tyg. 📅")
-                    }
-                
-                    NavigationLink(destination: ProfileView()) {
-                        HStack {
-                            Image(systemName: "creditcard")
-                            Text(String(localized: "Odkładam pieniądze"))
-                        }
-                    }
-                    .style(.filled)
-                    .padding(.bottom)
-                    .padding(.top)
-
-                    
-                    NavigationLink(destination: ProfileView()) {
-                        HStack {
-                            Image(systemName: "arrow.right")
-                            Text(String("See more"))
-
-                        }
-                    }
-                    .style(.border)
-                }
-                .padding()
-                .background(
-                    Rectangle()
-                        .cornerRadius(32)
-                        .foregroundColor(.blue) // Background color of the rectangle
-                )
-                .foregroundColor(.white)
-        }
-
-}
-
-
-
-struct GoalIcon: View {
-    let progress: CGFloat = 90
-    let size: CGFloat = 100
-    let lineWidth: CGFloat = 6
-    var body: some View {
-        ZStack {
-            Circle()
-                .stroke(Color.gray, lineWidth: lineWidth)
-                .rotationEffect(.degrees(-90))
-            Circle()
-                .trim(from: 0, to: progress / 360)
-                .stroke(Color.orange, lineWidth: lineWidth)
-                .rotationEffect(.degrees(-90))
-        }
-        .overlay(
-            Image(systemName: "ticket")
-                .foregroundColor(.white)
-                .font(.system(size: 40))
-                .frame(width: size - lineWidth / 2, height: size - lineWidth / 2)
-                .background(Color.gray.mix(with: Color.orange, by: 0.3))
-                .clipShape(Circle())
-        )
-        .frame(width: size, height: size)
     }
 }

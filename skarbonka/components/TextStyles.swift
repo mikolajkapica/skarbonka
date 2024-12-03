@@ -5,7 +5,7 @@ import SwiftUI
 struct Custom {
 }
 
-enum TextSize {
+enum SkarbonkaTextSize {
     case xxl
     case xl
     case l
@@ -16,20 +16,20 @@ enum TextSize {
     
     var fontSize: Font {
         switch self {
-        case .xxl: Font.system(size: 48, weight: .bold, design: .default)
-        case .xl: Font.system(size: 40, weight: .semibold, design: .default)
-        case .l: Font.system(size: 32, weight: .medium, design: .default)
-        case .ml: Font.system(size: 28, weight: .regular, design: .default)
-        case .m: Font.system(size: 24, weight: .regular, design: .default)
-        case .s: Font.system(size: 20, weight: .regular, design: .default)
-        case .xs: Font.system(size: 16, weight: .regular, design: .default)
+        case .xxl: Font.system(size: 48)
+        case .xl: Font.system(size: 40)
+        case .l: Font.system(size: 32)
+        case .ml: Font.system(size: 26)
+        case .m: Font.system(size: 24)
+        case .s: Font.system(size: 20)
+        case .xs: Font.system(size: 16)
         }
     }
 }
 
 extension Text {
-    func withSize(_ textSize: TextSize) -> some View {
-        return self.font(textSize.fontSize)
+    func withSize(_ textSize: SkarbonkaTextSize) -> some View {
+        return self.font(textSize.fontSize).kerning(0.5)
     }
 }
 
@@ -42,8 +42,8 @@ enum SkarbonkaButtonStyleEnum {
     
     var backgroundColor: Color {
         switch self {
-        case .filled: .orange
-        case .muted: .orange.mix(with: Color.gray, by: 0.3)
+        case .filled: SkarbonkaColors.Orange
+        case .muted: SkarbonkaColors.Orange
         case .border: .clear
         case .none: .clear
         }
@@ -59,6 +59,21 @@ enum SkarbonkaButtonStyleEnum {
     }
 }
 
+struct SkarbonkaColors {
+    static let Orange = Color(red: 1, green: 0.38, blue: 0)
+    static let white = Color(red: 1, green: 0.92, blue: 0.87)
+    static let black = Color.black
+    static let PurpleGradient = LinearGradient(
+        stops: [
+        Gradient.Stop(color: Color(red: 0.57, green: 0.3, blue: 0.68), location: 0.00),
+        Gradient.Stop(color: Color(red: 0.16, green: 0.17, blue: 0.32), location: 1.00),
+        ],
+        startPoint: UnitPoint(x: 0.5, y: 0),
+        endPoint: UnitPoint(x: 0.5, y: 1)
+        )
+    
+}
+
 
 extension NavigationLink {
     func style(_ style: SkarbonkaButtonStyleEnum) -> some View {
@@ -68,15 +83,16 @@ extension NavigationLink {
 
 struct SkarbonkaButtonStyle: ButtonStyle {
     let style: SkarbonkaButtonStyleEnum
+    let weight: Font.Weight = Font.Weight.bold
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding()
             .background(style.backgroundColor)
-            .foregroundStyle(.white)
             .cornerRadius(.infinity)
-            .overlay(style.border)
+            .foregroundStyle(.white)
+            .fontWeight(weight)
     }
 }
 

@@ -1,13 +1,33 @@
 {
   "sourceLanguage" : "pl",
   "strings" : {
-    "10 zł 💰" : {
+    "%lld %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
+    "%lld %@ " : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@ "
+          }
+        }
+      }
+    },
+    "%lld zł" : {
 
     },
-    "80 z 130 zł" : {
+    "129 zł" : {
 
     },
-    "Add to skarbonka" : {
+    "Add new goal" : {
 
     },
     "addToSkarbonka" : {
@@ -27,16 +47,61 @@
         }
       }
     },
+    "Back" : {
+
+    },
     "Bilet do energylandii" : {
 
     },
-    "Odkładam pieniądze" : {
+    "Bilet do EnergyLandii" : {
 
     },
-    "Open View" : {
+    "Brawo" : {
+
+    },
+    "Cena produktu" : {
+
+    },
+    "Co miesiąc" : {
+
+    },
+    "Co tydzień" : {
+
+    },
+    "Codziennie" : {
+
+    },
+    "Częstotliwość oszczędzania" : {
+
+    },
+    "ihsgdsdsdgsdgdsgsdgdsg" : {
+
+    },
+    "Jak często będziesz oszczędzać?" : {
+
+    },
+    "Jaką kwotę będziesz oszczędzać?" : {
+
+    },
+    "Masz już" : {
+
+    },
+    "Obecne oszczędności" : {
+
+    },
+    "Odłóż dziś" : {
 
     },
     "Savings" : {
+
+    },
+    "Teraz w skarbonce masz:" : {
+
+    },
+    "Wpisz nazwę Twojego celu" : {
+
+    },
+    "Wybierz grafikę" : {
 
     },
     "your goal?" : {
@@ -45,7 +110,10 @@
     "Your savings goals" : {
 
     },
-    "za 3 tyg. 📅" : {
+    "Zapisz" : {
+
+    },
+    "Zrobione" : {
 
     }
   },

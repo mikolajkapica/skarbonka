@@ -7,24 +7,16 @@ enum Tab {
     case test
 }
 
-
 struct ContentView: View {
-
-    var body: some View {
-        Navigation()
-    }
-}
-
-struct Navigation: View {
     @State private var selectedTab: Tab = .home
-    
+
     init() {
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = UIColor.white
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
-    
+
     var body: some View {
         TabView(selection: $selectedTab) {
             HomeView()
@@ -51,23 +43,9 @@ struct Navigation: View {
     }
 }
 
-
-struct TopBar: View {
-    var title: String
-    
-    var body: some View {
-        HStack {
-            Text(title).font(.largeTitle)
-            Spacer()
-            Image(systemName: "bell")
-        }
-        .padding(16)
-        .contentMargins(0)
-        .background(Color.white)
+struct NavigationPreview: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
 
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
-}

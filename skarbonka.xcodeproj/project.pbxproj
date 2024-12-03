@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		A1B798272CF8D96500199EA8 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B798262CF8D94800199EA8 /* GoalView.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		A1D9864F2CD0D50C008C5B76 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -28,7 +24,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A1B798262CF8D94800199EA8 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		A1D9863C2CD0D50A008C5B76 /* skarbonka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = skarbonka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D9864E2CD0D50C008C5B76 /* skarbonkaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = skarbonkaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D986582CD0D50C008C5B76 /* skarbonkaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = skarbonkaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +75,6 @@
 		A1D986332CD0D50A008C5B76 = {
 			isa = PBXGroup;
 			children = (
-				A1B798262CF8D94800199EA8 /* GoalView.swift */,
 				A1D9863E2CD0D50A008C5B76 /* skarbonka */,
 				A1D986512CD0D50C008C5B76 /* skarbonkaTests */,
 				A1D9865B2CD0D50C008C5B76 /* skarbonkaUITests */,
@@ -243,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1B798272CF8D96500199EA8 /* GoalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
