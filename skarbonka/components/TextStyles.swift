@@ -6,6 +6,7 @@ struct Custom {
 }
 
 enum SkarbonkaTextSize {
+    case xxxl
     case xxl
     case xl
     case l
@@ -16,6 +17,7 @@ enum SkarbonkaTextSize {
     
     var fontSize: Font {
         switch self {
+        case .xxxl: Font.system(size: 64)
         case .xxl: Font.system(size: 48)
         case .xl: Font.system(size: 40)
         case .l: Font.system(size: 32)
