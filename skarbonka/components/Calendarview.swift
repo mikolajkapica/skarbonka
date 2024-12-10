@@ -16,18 +16,17 @@ struct CalendarView: View {
                 .shadow(radius: 5)
         )
         .accentColor(SkarbonkaColors.Orange)
+        .environment(\.locale, Locale.init(identifier: "pl"))
     }
 
-    // Custom DateFormatter to display the selected date
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
+        formatter.locale = Locale(identifier: "pl_PL")
         return formatter
     }
 }
 
-struct CalendarView_Previews: PreviewProvider {
-    static var previews: some View {
-        CalendarView()
-    }
+#Preview {
+    CalendarView()
 }

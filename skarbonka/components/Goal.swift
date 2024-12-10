@@ -20,33 +20,30 @@ extension View {
 
 struct GoalSummary: View {
     var goal: Goal
-    var amountPaidAlready = 77
-    var amountToSave = 11
-    var currency = "zł"
     var body: some View {
         VStack{
             VStack {
                 VStack {
-                    Text("Bilet do energylandii")
-                    Text("129 zł")
+                    Text(goal.goalName)
+                    Text("\(goal.productPrice) zł")
                 }
                 .bold()
-                GoalIcon()
+                GoalIcon(progress: Float(goal.currentSavings) / Float(goal.productPrice))
                 VStack {
                     Text(String(localized: "Brawo"))
                     HStack {
                         Text(String(localized: "Masz już"))
-                        Text("\(amountPaidAlready) \(currency)").bold().foregroundColor(SkarbonkaColors.Orange)
+                        Text("\(goal.currentSavings) \(goal.currency)").bold().foregroundColor(SkarbonkaColors.Orange)
                     }
                 }
             }
             .padding(20)
 
             VStack {
-                Image(systemName: "creditcard").foregroundColor(SkarbonkaColors.Orange.mix(with: .white, by: 0.2))
+                Image("piggy_bank").foregroundColor(SkarbonkaColors.Orange.mix(with: .white, by: 0.2))
                 HStack {
                     Text(String(localized: "Odłóż dziś"))
-                    Text("\(amountToSave) \(currency) ").foregroundColor(SkarbonkaColors.Orange)
+                    Text("\(goal.productPrice) \(goal.currency) ").foregroundColor(SkarbonkaColors.Orange)
                 }
                 .bold()
 
@@ -73,11 +70,13 @@ struct GoalSummary: View {
         goal: Goal(
            goalName: "Bilet do EnergyLandii",
            selectedIcon: "puzzlepiece",
-           productPrice: "129",
-           currentSavings: "77",
+           productPrice: 129,
+           currentSavings: 77,
            savingFrequency: "Co tydzień",
            savingAmount: 11.0,
-           targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!
+           targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!,
+           currency: "zł",
+           icon: "cat"
        )
     )
     

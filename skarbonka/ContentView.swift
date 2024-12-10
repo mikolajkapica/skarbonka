@@ -8,6 +8,7 @@ enum Tab {
 }
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var context
     @State private var selectedTab: Tab = .home
 
     init() {
@@ -18,27 +19,32 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "creditcard")
-                    Text(String(localized: "Savings"))
-                }
-                .tag(Tab.home)
+        ZStack {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "creditcard")
+                        Text(String(localized: "Oszczędzanie"))
+                    }
+                    .tag(Tab.home)
 
-            SearchView()
-                .tabItem {
-                    Image(systemName: "play")
-                    Text(String("Games"))
-                }
-                .tag(Tab.search)
+                GamesView()
+                    .tabItem {
+                        Image(systemName: "play")
+                        Text(String("Gry"))
+                    }
+                    .tag(Tab.search)
 
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "person")
-                    Text(String("Profile"))
-                }
-                .tag(Tab.profile)
+                ProfileView()
+                    .tabItem {
+                        Image(systemName: "person")
+                        Text(String("Profil"))
+                    }
+                    .tag(Tab.profile)
+            }
+            
+            LionHelper()
+
         }
     }
 }

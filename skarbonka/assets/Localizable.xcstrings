@@ -24,12 +24,6 @@
     "%lld zł" : {
 
     },
-    "129 zł" : {
-
-    },
-    "Add new goal" : {
-
-    },
     "addToSkarbonka" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -47,13 +41,7 @@
         }
       }
     },
-    "Back" : {
-
-    },
-    "Bilet do energylandii" : {
-
-    },
-    "Bilet do EnergyLandii" : {
+    "Anuluj" : {
 
     },
     "Brawo" : {
@@ -62,28 +50,34 @@
     "Cena produktu" : {
 
     },
-    "Co miesiąc" : {
+    "Dalej" : {
 
     },
-    "Co tydzień" : {
-
-    },
-    "Codziennie" : {
-
-    },
-    "Częstotliwość oszczędzania" : {
-
-    },
-    "ihsgdsdsdgsdgdsgsdgdsg" : {
-
-    },
-    "Jak często będziesz oszczędzać?" : {
+    "Dodaj nowy cel" : {
 
     },
     "Jaką kwotę będziesz oszczędzać?" : {
 
     },
+    "już za 16 tygodni (29 kwietnia)" : {
+
+    },
+    "Kiedy zaczniesz oszczędzać?" : {
+
+    },
+    "Kupisz za %lld dni" : {
+
+    },
+    "Kwota" : {
+
+    },
     "Masz już" : {
+
+    },
+    "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego." : {
+
+    },
+    "np. karty PokemonGo" : {
 
     },
     "Obecne oszczędności" : {
@@ -92,13 +86,25 @@
     "Odłóż dziś" : {
 
     },
-    "Savings" : {
+    "Oszczędzanie" : {
+
+    },
+    "Select an Option" : {
+
+    },
+    "Select Date" : {
 
     },
     "Teraz w skarbonce masz:" : {
 
     },
+    "Twoje cele oszczędnościowe" : {
+
+    },
     "Wpisz nazwę Twojego celu" : {
+
+    },
+    "Wróć" : {
 
     },
     "Wybierz grafikę" : {
@@ -107,10 +113,10 @@
     "your goal?" : {
 
     },
-    "Your savings goals" : {
+    "Zapisz cel" : {
 
     },
-    "Zapisz" : {
+    "Znalazłeś się w nieodkrytym miejscu!" : {
 
     },
     "Zrobione" : {

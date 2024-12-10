@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GoalIcon: View {
-    let progress: CGFloat = 230
+    let progress: Float
     let size: CGFloat = 150
     let lineWidth: CGFloat = 10
     var body: some View {
@@ -10,7 +10,7 @@ struct GoalIcon: View {
                 .stroke(Color.white.opacity(0.1), lineWidth: lineWidth)
                 .rotationEffect(.degrees(-90))
             Circle()
-                .trim(from: 0, to: progress / 360)
+                .trim(from: 0, to: CGFloat(progress))
                 .stroke(SkarbonkaColors.Orange, lineWidth: lineWidth)
                 .rotationEffect(.degrees(-90))
         }

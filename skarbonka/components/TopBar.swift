@@ -17,15 +17,13 @@ struct TopBar: View {
             }
             Text(title).withSize(.ml).bold()
             Spacer()
-            Image(systemName: "bell")
+            Image("FaceTalking")
+            Image("Bell")
         }
         .navigationBarBackButtonHidden(true)
         .contentMargins(0)
         .padding(16)
         .background(.white)
-        .shadow(color: .black.opacity(0.3), radius: 1, x: 0, y: 1)
-        .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
-        
     }
 }
 
