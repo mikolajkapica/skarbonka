@@ -1,34 +1,13 @@
+import SwiftData
 import SwiftUI
 
 struct HomeView: View {
     // TODO: fetch from SwiftData
-    var goals = [
-        Goal(
-            goalName: "New Laptop",
-            selectedIcon: "laptopcomputer",
-            productPrice: 999,
-            currentSavings: 450,
-            savingFrequency: "Bi-weekly",
-            savingAmount: 25.0,
-            targetDate: Calendar.current.date(byAdding: .day, value: 60, to: Date())!,
-            currency: "zł",
-            icon: "cat"
-        ),
-        Goal(
-           goalName: "Bilet do EnergyLandii",
-           selectedIcon: "puzzlepiece",
-           productPrice: 129,
-           currentSavings: 77,
-           savingFrequency: "Co tydzień",
-           savingAmount: 11.0,
-           targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!,
-           currency: "zł",
-           icon: "cat"
-       ),
-    ]
-        
-        var body: some View {
-        NavigationView {
+    @Environment(\.modelContext) private var modelContext
+    @Query var goals: [Goal]
+
+    var body: some View {
+        NavigationStack {
             VStack(spacing: 0) {
                 TopBar(title: "Oszczęności", isBack: false)
                 ScrollView {
@@ -50,6 +29,12 @@ struct HomeView: View {
                 .background(SkarbonkaColors.PurpleGradient)
             }
         }
+//        .onAppear {
+//            for goal in goals {
+//                modelContext.delete(goal)
+//            }
+//            
+//        }
     }
 
     struct NewGoal: View {

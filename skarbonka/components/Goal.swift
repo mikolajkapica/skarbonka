@@ -69,14 +69,13 @@ struct GoalSummary: View {
     GoalSummary(
         goal: Goal(
            goalName: "Bilet do EnergyLandii",
-           selectedIcon: "puzzlepiece",
+           icon: "puzzlepiece",
            productPrice: 129,
            currentSavings: 77,
            savingFrequency: "Co tydzień",
            savingAmount: 11.0,
            targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!,
-           currency: "zł",
-           icon: "cat"
+           currency: "zł"
        )
     )
     

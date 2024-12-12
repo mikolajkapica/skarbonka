@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 enum Tab {
@@ -8,7 +9,6 @@ enum Tab {
 }
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var context
     @State private var selectedTab: Tab = .home
 
     init() {
@@ -16,6 +16,7 @@ struct ContentView: View {
         appearance.backgroundColor = UIColor.white
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
+        
     }
 
     var body: some View {
@@ -42,16 +43,22 @@ struct ContentView: View {
                     }
                     .tag(Tab.profile)
             }
-            
+
             LionHelper()
 
         }
     }
 }
 
-struct NavigationPreview: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+#Preview {
+    let configuration = ModelConfiguration()
+    let container = try! ModelContainer(
+        for: Goal.self, configurations: configuration)
 
+
+
+    
+    ContentView()
+        .modelContainer(container)
+        .fontDesign(.rounded)
+}

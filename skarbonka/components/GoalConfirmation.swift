@@ -3,6 +3,7 @@ import SwiftUI
 struct GoalConfirmation: View {
     @Environment(\.modelContext) private var context
     let goal: Goal
+    @State var navigateToDetail: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -37,23 +38,20 @@ struct GoalConfirmation: View {
                 .padding(.vertical)
 
                 VStack(spacing: 16) {
-                    NavigationLink(
-                        destination: GoalEnd()
-                    ) {
-                        Button(action: {
-                            context.insert(goal)
-                        }) {
-                            Text("Zapisz cel")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(SkarbonkaColors.Orange)
-                                .cornerRadius(.infinity)
-
-                        }
+                    Button(action: {
+                        context.insert(goal)
+                        try! context.save()
+                        navigateToDetail.toggle()
+                    }) {
+                        Text("Zapisz cel")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(SkarbonkaColors.Orange)
+                            .cornerRadius(.infinity)
                     }
-
+                    
                     Button(action: {
                         print("Saving goal updated")
                     }) {
@@ -70,6 +68,9 @@ struct GoalConfirmation: View {
             .padding(24)
         }
         .background(SkarbonkaColors.PurpleGradient)
+        .navigationDestination(isPresented: $navigateToDetail) {
+            GoalEnd()
+        }
     }
 
 }
@@ -79,15 +80,14 @@ struct GoalConfirmation: View {
         goal:
             Goal(
                 goalName: "New Laptop",
-                selectedIcon: "laptopcomputer",
+                icon: "laptopcomputer",
                 productPrice: 999,
                 currentSavings: 450,
                 savingFrequency: "Bi-weekly",
                 savingAmount: 25.0,
                 targetDate: Calendar.current.date(
                     byAdding: .day, value: 60, to: Date())!,
-                currency: "zł",
-                icon: "cat"
+                currency: "zł"
             )
     )
 }

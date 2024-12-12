@@ -5,7 +5,7 @@ import SwiftData
 class Goal {
     @Attribute(.unique) var id = UUID()
     var goalName: String
-    var selectedIcon: String?
+    var icon: String?
     var productPrice: Int
     var currentSavings: Int
     var savingFrequency: String
@@ -14,10 +14,10 @@ class Goal {
     var currency: String = "zł"
     
 
-    init(goalName: String, selectedIcon: String? = Optional.none, productPrice: Int, currentSavings: Int, savingFrequency: String, savingAmount: Double, targetDate: Date, currency: String, icon: String) {
+    init(goalName: String, icon: String? = Optional.none, productPrice: Int, currentSavings: Int, savingFrequency: String, savingAmount: Double, targetDate: Date, currency: String) {
         self.id = UUID()
         self.goalName = goalName
-        self.selectedIcon = selectedIcon
+        self.icon = icon
         self.productPrice = productPrice
         self.currentSavings = currentSavings
         self.savingFrequency = savingFrequency

@@ -2,15 +2,14 @@ import SwiftUI
 
 struct GoalView: View {
     @State var goal = Goal(
-        goalName: "Bilet do EnergyLandii",
-        productPrice: 129,
-        currentSavings: 77,
-        savingFrequency: "Co tydzień",
-        savingAmount: 11.0,
-        targetDate: Calendar.current.date(
-            byAdding: .day, value: 16, to: Date())!,
-        currency: "zł",
-        icon: "cat"
+        goalName: "",
+        icon: "cat",
+        productPrice: 0,
+        currentSavings: 10,
+        savingFrequency: "Yes",
+        savingAmount: 50.0,
+        targetDate: Date(),
+        currency: "zł"
     )
 
     var icons = [
@@ -23,7 +22,26 @@ struct GoalView: View {
         GridItem(.flexible()),
     ]
 
-    @State var selectedOption = Optional<String>.none
+    @State var selectedOption: String? = nil
+
+    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.modelContext) private var modelContext
+
+    @State var isGoalCompleted: Bool = false
+
+    //    @State var isGoalComplete: Bool = false;
+    // Function to check if the goal is complete
+    //    func isGoalComplete() -> Bool {
+    //        print("isGoalComplete")
+    //        var completed =
+    //
+    //        if (!completed) {
+    //            buttonClicked = false
+    //        }
+    //
+    //        return completed
+    //    }
+    //
 
     var body: some View {
         VStack(spacing: 0) {
@@ -31,6 +49,7 @@ struct GoalView: View {
             ScrollView {
                 VStack {
                     VStack(alignment: .leading, spacing: 32) {
+                        // Goal Name
                         VStack(alignment: .leading) {
                             Text("Wpisz nazwę Twojego celu")
                                 .foregroundColor(.white)
@@ -52,10 +71,14 @@ struct GoalView: View {
                             LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(icons, id: \.self) { icon in
                                     Button(action: {
-                                        goal.selectedIcon = icon
+                                        goal.icon = icon
                                     }) {
                                         Image(systemName: icon)
-                                            .foregroundColor(goal.selectedIcon == icon ? SkarbonkaColors.Orange : SkarbonkaColors.black)
+                                            .foregroundColor(
+                                                goal.icon == icon
+                                                    ? SkarbonkaColors.Orange
+                                                    : SkarbonkaColors.black
+                                            )
                                             .font(.system(size: 40))
                                             .frame(width: 100, height: 100)
                                             .background(SkarbonkaColors.white)
@@ -65,6 +88,7 @@ struct GoalView: View {
                             }
                         }
 
+                        // Product Price
                         VStack {
                             HStack {
                                 Text("Cena produktu")
@@ -90,6 +114,7 @@ struct GoalView: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
 
+                            // Current Savings
                             HStack {
                                 Text("Teraz w skarbonce masz:")
                                 Spacer()
@@ -101,7 +126,8 @@ struct GoalView: View {
                                         },
                                         set: { newValue in
                                             if let intValue = Int(newValue) {
-                                                self.goal.currentSavings = intValue
+                                                self.goal.currentSavings =
+                                                    intValue
                                             }
                                         }
                                     )
@@ -112,9 +138,9 @@ struct GoalView: View {
                             .padding()
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
-
                         }
 
+                        // Saving Frequency (Radio Buttons)
                         Text("Select an Option")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -123,8 +149,7 @@ struct GoalView: View {
                             selectedOption: $selectedOption,
                             options: ["Codziennie", "Co tydzień", "Co miesiąc"])
 
-                        SavingsView()
-
+                        // Target Date (Calendar)
                         VStack(alignment: .leading) {
                             Text("Kiedy zaczniesz oszczędzać?")
                                 .font(.headline)
@@ -133,8 +158,17 @@ struct GoalView: View {
                             CalendarView()
 
                         }
+
+                        // Button Section
                         VStack(spacing: 16) {
-                            NavigationLink(destination: GoalConfirmation(goal: goal)) {
+                            Button(action: {
+                                isGoalCompleted =
+                                    !goal.goalName.isEmpty
+                                    && goal.productPrice > 0
+                                    && goal.currentSavings >= 0
+                                    && selectedOption != nil
+                                    && goal.icon != ""
+                            }) {
                                 Text("Dalej")
                                     .font(.headline)
                                     .foregroundColor(.white)
@@ -144,8 +178,9 @@ struct GoalView: View {
                                     .cornerRadius(.infinity)
                             }
 
+                            // Cancel button
                             Button(action: {
-                                print("Saving goal updated")
+                                self.presentationMode.wrappedValue.dismiss()  // Go back
                             }) {
                                 Text("Anuluj")
                                     .font(.headline)
@@ -161,6 +196,9 @@ struct GoalView: View {
                 .padding(24)
             }
             .background(SkarbonkaColors.PurpleGradient)
+            .navigationDestination(isPresented: $isGoalCompleted) {
+                GoalConfirmation(goal: goal)
+            }
         }
     }
 }
