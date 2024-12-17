@@ -6,8 +6,8 @@ struct GoalView: View {
         icon: "cat",
         productPrice: 0,
         currentSavings: 10,
-        savingFrequency: "Yes",
-        savingAmount: 50.0,
+        savingFrequency: 1,
+        savingAmount: 50,
         targetDate: Date(),
         currency: "zł"
     )

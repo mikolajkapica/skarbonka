@@ -29,12 +29,6 @@ struct HomeView: View {
                 .background(SkarbonkaColors.PurpleGradient)
             }
         }
-//        .onAppear {
-//            for goal in goals {
-//                modelContext.delete(goal)
-//            }
-//            
-//        }
     }
 
     struct NewGoal: View {

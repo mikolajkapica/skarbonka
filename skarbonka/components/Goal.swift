@@ -72,8 +72,8 @@ struct GoalSummary: View {
            icon: "puzzlepiece",
            productPrice: 129,
            currentSavings: 77,
-           savingFrequency: "Co tydzień",
-           savingAmount: 11.0,
+           savingFrequency: 7,
+           savingAmount: 11,
            targetDate: Calendar.current.date(byAdding: .day, value: 16, to: Date())!,
            currency: "zł"
        )

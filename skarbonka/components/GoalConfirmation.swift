@@ -4,6 +4,32 @@ struct GoalConfirmation: View {
     @Environment(\.modelContext) private var context
     let goal: Goal
     @State var navigateToDetail: Bool = false
+    
+    
+    
+    
+    func futureDate(price: Int, savingAmount: Int, savingFrequency: Int) -> String {
+        let daysToAdd = price / savingAmount
+        
+        let today = Date()
+        // Add the specified number of days to the current date
+        if let futureDate = Calendar.current.date(byAdding: .day, value: daysToAdd, to: today) {
+            // Format the future date to show only the day and month
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM"  // "dd" for day, "MMM" for abbreviated month
+            let formattedDate = dateFormatter.string(from: futureDate)
+            
+            // Calculate the number of full weeks
+            let weeks = daysToAdd / 7
+            
+            // Return the result as a string
+            return "już za \(weeks) tygodni (\(formattedDate))"
+        } else {
+            // Handle the case where the date calculation fails
+            return "Invalid date calculation"
+        }
+    }
+
 
     var body: some View {
         VStack(spacing: 0) {
@@ -11,7 +37,7 @@ struct GoalConfirmation: View {
             ScrollView {
                 VStack {
                     let msg = [
-                        "Oszczędzaj ", "5zł",
+                        "Oszczędzaj ", String(goal.savingAmount) + "zł",
                         " tygodniowo i ciesz się z zakupu Puzzle za 80zł",
                     ]
 
@@ -20,7 +46,7 @@ struct GoalConfirmation: View {
                             SkarbonkaColors.Orange)
                         + Text(msg[2])).frame(maxWidth: CGFloat(290))
 
-                    Image(systemName: "puzzlepiece")
+                    Image(systemName: goal.icon)
                         .foregroundColor(
                             SkarbonkaColors.black
                         )
@@ -28,8 +54,9 @@ struct GoalConfirmation: View {
                         .frame(width: 170, height: 170)
                         .background(SkarbonkaColors.white)
                         .clipShape(Circle())
-
-                    Text("już za 16 tygodni (29 kwietnia)")
+                    
+                    Text(futureDate(price: goal.productPrice, savingAmount: goal.savingAmount, savingFrequency: goal.savingFrequency))
+                    
                 }
                 .foregroundStyle(.white)
                 .font(SkarbonkaTextSize.m.fontSize)
@@ -39,8 +66,13 @@ struct GoalConfirmation: View {
 
                 VStack(spacing: 16) {
                     Button(action: {
+                        print("fsdiogjsd")
                         context.insert(goal)
-                        try! context.save()
+                        do {
+                            try context.save()
+                        } catch {
+                            print("error")
+                        }
                         navigateToDetail.toggle()
                     }) {
                         Text("Zapisz cel")
@@ -83,8 +115,8 @@ struct GoalConfirmation: View {
                 icon: "laptopcomputer",
                 productPrice: 999,
                 currentSavings: 450,
-                savingFrequency: "Bi-weekly",
-                savingAmount: 25.0,
+                savingFrequency: 1,
+                savingAmount: 25,
                 targetDate: Calendar.current.date(
                     byAdding: .day, value: 60, to: Date())!,
                 currency: "zł"
