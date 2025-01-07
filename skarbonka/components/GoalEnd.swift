@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct GoalEnd: View {
+    let goal: Goal
+    
     var body: some View {
         VStack(spacing: 0) {
             TopBar(title: "Goal", isBack: false)
@@ -53,5 +55,5 @@ struct GoalEnd: View {
 }
 
 #Preview {
-    GoalEnd()
+    GoalEnd(goal: mockGoal)
 }

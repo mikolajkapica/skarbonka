@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GoalView: View {
+struct GoalCreateView: View {
     @State var goal = Goal(
         goalName: "",
         icon: "cat",
@@ -11,37 +11,15 @@ struct GoalView: View {
         targetDate: Date(),
         currency: "zł"
     )
-
+    @State var selectedOption: String? = nil
+    @State var isGoalCompleted: Bool = false
+    
     var icons = [
         "cat", "bicycle", "ticket", "puzzlepiece", "music.note", "photo",
     ]
 
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-    ]
-
-    @State var selectedOption: String? = nil
-
     @Environment(\.presentationMode) private var presentationMode
     @Environment(\.modelContext) private var modelContext
-
-    @State var isGoalCompleted: Bool = false
-
-    //    @State var isGoalComplete: Bool = false;
-    // Function to check if the goal is complete
-    //    func isGoalComplete() -> Bool {
-    //        print("isGoalComplete")
-    //        var completed =
-    //
-    //        if (!completed) {
-    //            buttonClicked = false
-    //        }
-    //
-    //        return completed
-    //    }
-    //
 
     var body: some View {
         VStack(spacing: 0) {
@@ -68,7 +46,13 @@ struct GoalView: View {
                                 .font(.headline)
                                 .foregroundColor(.white)
 
-                            LazyVGrid(columns: columns, spacing: 16) {
+                            LazyVGrid(
+                                columns: [
+                                    GridItem(.flexible()),
+                                    GridItem(.flexible()),
+                                    GridItem(.flexible()),
+                                ], spacing: 16
+                            ) {
                                 ForEach(icons, id: \.self) { icon in
                                     Button(action: {
                                         goal.icon = icon
@@ -88,7 +72,6 @@ struct GoalView: View {
                             }
                         }
 
-                        // Product Price
                         VStack {
                             HStack {
                                 Text("Cena produktu")
@@ -140,7 +123,6 @@ struct GoalView: View {
                             .cornerRadius(8)
                         }
 
-                        // Saving Frequency (Radio Buttons)
                         Text("Select an Option")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -149,7 +131,6 @@ struct GoalView: View {
                             selectedOption: $selectedOption,
                             options: ["Codziennie", "Co tydzień", "Co miesiąc"])
 
-                        // Target Date (Calendar)
                         VStack(alignment: .leading) {
                             Text("Kiedy zaczniesz oszczędzać?")
                                 .font(.headline)
@@ -159,7 +140,6 @@ struct GoalView: View {
 
                         }
 
-                        // Button Section
                         VStack(spacing: 16) {
                             Button(action: {
                                 isGoalCompleted =
@@ -178,7 +158,6 @@ struct GoalView: View {
                                     .cornerRadius(.infinity)
                             }
 
-                            // Cancel button
                             Button(action: {
                                 self.presentationMode.wrappedValue.dismiss()  // Go back
                             }) {
@@ -205,6 +184,6 @@ struct GoalView: View {
 
 struct GoalView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalView()
+        GoalCreateView()
     }
 }

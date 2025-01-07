@@ -6,11 +6,6 @@ struct SkarbonkaApp: App {
     
     @Environment(\.modelContext) private var context
     
-    init() {
-        try! context.container.erase()
-    }
-
-    
     var body: some Scene {
         WindowGroup {
                 ZStack {

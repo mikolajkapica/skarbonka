@@ -25,5 +25,19 @@ class Goal {
         self.targetDate = targetDate
         self.currency = currency
     }
-    
 }
+
+let mockGoal = Goal(
+    goalName: "New Laptop",
+    icon: "laptopcomputer",
+    productPrice: 999,
+    currentSavings: 450,
+    savingFrequency: 1,
+    savingAmount: 25,
+    targetDate: Calendar.current.date(
+        byAdding: .day, value: 60, to: Date())!,
+    currency: "zł"
+)
+
+
+

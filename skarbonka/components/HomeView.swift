@@ -2,7 +2,6 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    // TODO: fetch from SwiftData
     @Environment(\.modelContext) private var modelContext
     @Query var goals: [Goal]
 
@@ -17,7 +16,7 @@ struct HomeView: View {
                             .foregroundColor(.white)
                         NavigationLink(
                             String(localized: "Dodaj nowy cel"),
-                            destination: GoalView()
+                            destination: GoalCreateView()
                         )
                         .buttonStyle(SkarbonkaButtonStyle(style: .filled))
                         ForEach(goals, id: \.goalName) { goal in
@@ -30,13 +29,9 @@ struct HomeView: View {
             }
         }
     }
-
-    struct NewGoal: View {
-        @State private var goalName: String = ""
-        var body: some View {
-            VStack {
-                TextField("your goal?", text: $goalName)
-            }
-        }
-    }
 }
+
+#Preview {
+    HomeView()
+}
+
