@@ -13,7 +13,7 @@ struct GoalCreateView: View {
     )
     @State var selectedOption: String? = nil
     @State var isGoalCompleted: Bool = false
-    
+
     var icons = [
         "cat", "bicycle", "ticket", "puzzlepiece", "music.note", "photo",
     ]
@@ -23,16 +23,18 @@ struct GoalCreateView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            TopBar(title: "Goal")
             ScrollView {
                 VStack {
                     VStack(alignment: .leading, spacing: 32) {
                         // Goal Name
+                        Button(
+                            action: { print(Router.shared.path) }
+                        ) { Text("Log") }
                         VStack(alignment: .leading) {
                             Text("Wpisz nazwę Twojego celu")
                                 .foregroundColor(.white)
                                 .font(.headline)
-
+                            
                             TextField(
                                 "np. karty PokemonGo", text: $goal.goalName
                             )
@@ -40,12 +42,12 @@ struct GoalCreateView: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(.infinity)
                         }
-
+                        
                         VStack(alignment: .leading) {
                             Text("Wybierz grafikę")
                                 .font(.headline)
                                 .foregroundColor(.white)
-
+                            
                             LazyVGrid(
                                 columns: [
                                     GridItem(.flexible()),
@@ -60,8 +62,8 @@ struct GoalCreateView: View {
                                         Image(systemName: icon)
                                             .foregroundColor(
                                                 goal.icon == icon
-                                                    ? SkarbonkaColors.Orange
-                                                    : SkarbonkaColors.black
+                                                ? SkarbonkaColors.Orange
+                                                : SkarbonkaColors.black
                                             )
                                             .font(.system(size: 40))
                                             .frame(width: 100, height: 100)
@@ -71,7 +73,7 @@ struct GoalCreateView: View {
                                 }
                             }
                         }
-
+                        
                         VStack {
                             HStack {
                                 Text("Cena produktu")
@@ -85,7 +87,7 @@ struct GoalCreateView: View {
                                         set: { newValue in
                                             if let intValue = Int(newValue) {
                                                 self.goal.productPrice =
-                                                    intValue
+                                                intValue
                                             }
                                         }
                                     )
@@ -96,7 +98,7 @@ struct GoalCreateView: View {
                             .padding()
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
-
+                            
                             // Current Savings
                             HStack {
                                 Text("Teraz w skarbonce masz:")
@@ -110,7 +112,7 @@ struct GoalCreateView: View {
                                         set: { newValue in
                                             if let intValue = Int(newValue) {
                                                 self.goal.currentSavings =
-                                                    intValue
+                                                intValue
                                             }
                                         }
                                     )
@@ -122,32 +124,32 @@ struct GoalCreateView: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
                         }
-
+                        
                         Text("Select an Option")
                             .font(.headline)
                             .foregroundColor(.white)
-
+                        
                         RadioButtonPickerView(
                             selectedOption: $selectedOption,
                             options: ["Codziennie", "Co tydzień", "Co miesiąc"])
-
+                        
                         VStack(alignment: .leading) {
                             Text("Kiedy zaczniesz oszczędzać?")
                                 .font(.headline)
                                 .foregroundStyle(.white)
-
+                            
                             CalendarView()
-
+                            
                         }
-
+                        
                         VStack(spacing: 16) {
                             Button(action: {
                                 isGoalCompleted =
-                                    !goal.goalName.isEmpty
-                                    && goal.productPrice > 0
-                                    && goal.currentSavings >= 0
-                                    && selectedOption != nil
-                                    && goal.icon != ""
+                                !goal.goalName.isEmpty
+                                && goal.productPrice > 0
+                                && goal.currentSavings >= 0
+                                && selectedOption != nil
+                                && goal.icon != ""
                             }) {
                                 Text("Dalej")
                                     .font(.headline)
@@ -157,7 +159,7 @@ struct GoalCreateView: View {
                                     .background(SkarbonkaColors.Orange)
                                     .cornerRadius(.infinity)
                             }
-
+                            
                             Button(action: {
                                 self.presentationMode.wrappedValue.dismiss()  // Go back
                             }) {
@@ -179,6 +181,7 @@ struct GoalCreateView: View {
                 GoalConfirmation(goal: goal)
             }
         }
+        .topBarTitle("GoalCreateView")
     }
 }
 

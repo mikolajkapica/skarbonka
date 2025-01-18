@@ -1,9 +1,8 @@
 import SwiftUI
 
-struct GamesView: View {
+struct ProfileView: View {
     var body: some View {
         VStack {
-            TopBar(title: "Gry")
             Spacer()
             Text("Znalazłeś się w nieodkrytym miejscu!")
                 .padding(16)

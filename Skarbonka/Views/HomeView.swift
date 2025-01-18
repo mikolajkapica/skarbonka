@@ -2,13 +2,12 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    @Environment(\.modelContext) private var modelContext
     @Query var goals: [Goal]
+    @ObservedObject var router = Router.shared
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $router.path) {
             VStack(spacing: 0) {
-                TopBar(title: "Oszczęności", isBack: false)
                 ScrollView {
                     VStack(spacing: 20) {
                         Text(String(localized: "Twoje cele oszczędnościowe"))
@@ -16,17 +15,20 @@ struct HomeView: View {
                             .foregroundColor(.white)
                         NavigationLink(
                             String(localized: "Dodaj nowy cel"),
-                            destination: GoalCreateView()
+                            value: mockGoal
                         )
-                        .buttonStyle(SkarbonkaButtonStyle(style: .filled))
+                        .navigationDestination(for: Goal.self, destination: { _ in GoalCreateView() })
+//                        .buttonStyle(SkarbonkaButtonStyle(style: .filled))
                         ForEach(goals, id: \.goalName) { goal in
                             GoalSummary(goal: goal)
                         }
                     }
                     .padding(24)
                 }
-                .background(SkarbonkaColors.PurpleGradient)
             }
+            .frame(maxWidth: .infinity)
+            .background(SkarbonkaColors.PurpleGradient)
+            .topBarTitle("Gówne")
         }
     }
 }

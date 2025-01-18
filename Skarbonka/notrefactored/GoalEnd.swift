@@ -5,7 +5,6 @@ struct GoalEnd: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            TopBar(title: "Goal", isBack: false)
             ScrollView {
                 VStack {
                     Text(String("Twój cel zotał dodany"))

@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class skarbonkaUITestsLaunchTests: XCTestCase {
+final class SkarbonkaUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

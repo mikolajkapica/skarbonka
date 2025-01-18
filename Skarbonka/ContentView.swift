@@ -3,23 +3,23 @@ import SwiftUI
 
 enum Tab {
     case home
-    case search
+    case games
     case profile
-    case test
 }
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .home
 
+    // TODO:
     init() {
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = UIColor.white
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
-        
     }
 
     var body: some View {
+        TopBar()
         ZStack {
             TabView(selection: $selectedTab) {
                 HomeView()
@@ -34,7 +34,7 @@ struct ContentView: View {
                         Image(systemName: "play")
                         Text(String("Gry"))
                     }
-                    .tag(Tab.search)
+                    .tag(Tab.games)
 
                 ProfileView()
                     .tabItem {
@@ -43,9 +43,7 @@ struct ContentView: View {
                     }
                     .tag(Tab.profile)
             }
-
             LionHelper()
-
         }
     }
 }
@@ -53,12 +51,8 @@ struct ContentView: View {
 #Preview {
     let configuration = ModelConfiguration()
     let container = try! ModelContainer(
-        for: Goal.self, configurations: configuration)
-
-
-
-    
-    ContentView()
-        .modelContainer(container)
-        .fontDesign(.rounded)
+        for: Goal.self,
+        configurations: configuration
+    )
+    ContentView().modelContainer(container)
 }
