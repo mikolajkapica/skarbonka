@@ -3,20 +3,20 @@ import SwiftUI
 
 struct TopBar: View {
     @ObservedObject var viewModel = TopBarViewModel.shared
+    @EnvironmentObject var style: StyleConfig
+    @EnvironmentObject var router: Router
 
     var body: some View {
         HStack {
             if viewModel.isBack {
                 Button(action: {
-                    Router.shared.back()
+                    router.path.removeLast()
                 }) {
                     Image(systemName: "arrow.left")
-                        .foregroundColor(SkarbonkaColors.Orange)
+                        .foregroundColor(style.theme.primary)
                 }
             }
-            Text(viewModel.title)
-                .withSize(.ml)
-                .bold()
+            Text(viewModel.title).font(style.typography.m)
             Spacer()
             Image("FaceTalking")
             Image("Bell")
@@ -40,7 +40,7 @@ class TopBarViewModel: ObservableObject {
     @Published var title: String
     @Published var isBack: Bool
 
-    init(title: String = "XXX", isBack: Bool = true) {
+    init(title: String = "", isBack: Bool = false) {
         self.title = title
         self.isBack = isBack
     }

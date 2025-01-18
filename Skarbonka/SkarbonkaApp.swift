@@ -5,15 +5,16 @@ import SwiftUI
 struct SkarbonkaApp: App {
     @Environment(\.modelContext) private var context
     @StateObject private var router = Router()
-    @StateObject private var configuration = Configuration()
+    @StateObject private var style = StyleConfig()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: Goal.self)
-                .fontDesign(configuration.fontDesign)
+                .modelContainer(for: GoalModel.self)
+                .fontDesign(style.typography.fontDesign)
+                .foregroundColor(.white)
                 .environmentObject(router)
-                .environmentObject(configuration)
+                .environmentObject(style)
         }
     }
 }
