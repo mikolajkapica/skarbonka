@@ -47,9 +47,6 @@ struct ContentView: View {
                 .tag(Tab.profile)
         }
         .tint(style.theme.primary)
-        .safeAreaInset(edge: VerticalEdge.bottom) {
-            LionHelper()
-        }
     }
 
 }

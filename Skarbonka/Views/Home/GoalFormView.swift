@@ -9,6 +9,10 @@ struct GoalFormView: View {
     enum FocusedField { case int, dec }
     @FocusState private var focusedField: FocusedField?
 
+    // Alert state
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
@@ -24,11 +28,9 @@ struct GoalFormView: View {
         }
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
-        .onChange(of: viewModel.isGoalCompleted) { (_, _) in
-            router.path.append(viewModel.goal)
-        }
         .navigationDestination(isPresented: $viewModel.isGoalCompleted) {
-            GoalConfirmation(
+            router.path.append(viewModel.goal)
+            return GoalConfirmation(
                 viewModel: GoalConfirmationViewModel(
                     context: modelContext, goal: viewModel.goal))
         }
@@ -166,11 +168,17 @@ struct GoalFormView: View {
     private var actionButtonsView: some View {
         VStack(spacing: 16) {
             Button(action: {
-                viewModel.isGoalCompleted = viewModel.isGoalValid()
+                if viewModel.isGoalValid() {
+                    viewModel.isGoalCompleted = true
+                } else {
+                    alertMessage = "Please fill in all required fields"
+                    showAlert = true
+                }
             }) {
                 Text("Dalej").frame(maxWidth: .infinity)
             }
             .buttonStyle(FilledButton())
+            .disabled(!viewModel.isGoalValid()) // Disable button if validation fails
 
             Button(action: {
                 router.path.removeLast()
@@ -179,6 +187,9 @@ struct GoalFormView: View {
             }
             .buttonStyle(MutedButton())
             .frame(maxWidth: .infinity)
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Validation Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
     }
 }

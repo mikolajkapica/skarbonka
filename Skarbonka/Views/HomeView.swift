@@ -17,9 +17,9 @@ struct HomeView: View {
                         .foregroundColor(style.theme.foreground)
                     NavigationLink(
                         String(localized: "Dodaj nowy cel"),
-                        value: GoalModel()
+                        value: "goalForm"
                     )
-                    .navigationDestination(for: GoalModel.self) { _ in GoalFormView() }
+                    .navigationDestination(for: String.self) { _ in GoalFormView() }
                     .buttonStyle(FilledButton())
                     .bold()
                     ForEach(goals, id: \.id) { goal in
@@ -31,6 +31,9 @@ struct HomeView: View {
             .frame(maxWidth: .infinity)
             .background(style.theme.backgroundGradient)
             .topBarTitle(String(localized: "Oszczędzanie"))
+        }
+        .safeAreaInset(edge: VerticalEdge.bottom) {
+            LionHelper()
         }
     }
 }

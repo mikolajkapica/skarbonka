@@ -1,7 +1,16 @@
 import SwiftUI
 
+class LionHelperViewModel: ObservableObject {
+    var msg = String(
+        localized:
+            "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego."
+    )
+}
+
 struct LionHelper: View {
     @State private var showBubble: Bool = false
+    @ObservedObject private var viewModel = LionHelperViewModel()
+    
     
     @EnvironmentObject var style: StyleConfig
 
@@ -35,12 +44,7 @@ struct LionHelper: View {
 
     var bubble: some View {
         VStack(alignment: .trailing) {
-            Text(
-                String(
-                    localized:
-                        "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego."
-                )
-            )
+            Text(viewModel.msg)
             .padding()
             .padding(.trailing, 20)
             .background(Color.white)
@@ -65,7 +69,7 @@ struct LionHelper: View {
                 bubble
             }
             lionButton
-                .padding(.bottom, 40)
+                .offset(y: 10)
         }
     }
 }

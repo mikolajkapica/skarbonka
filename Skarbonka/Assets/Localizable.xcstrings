@@ -11,12 +11,22 @@
         }
       }
     },
-    "%lf %@" : {
+    "%@ %lld %@ %@" : {
       "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$lf %2$@"
+            "value" : "%1$@ %2$lld %3$@ %4$@"
+          }
+        }
+      }
+    },
+    "%lld %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
           }
         }
       }
@@ -59,7 +69,16 @@
     "Dodaj nowy cel" : {
 
     },
+    "dziennie" : {
+
+    },
+    "Final Score: %lld" : {
+
+    },
     "fsdg" : {
+
+    },
+    "Game Over!" : {
 
     },
     "Gry" : {
@@ -80,7 +99,13 @@
     "Kwota" : {
 
     },
+    "Łapacz monet" : {
+
+    },
     "Masz już" : {
+
+    },
+    "miesiecznie" : {
 
     },
     "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego." : {
@@ -98,7 +123,16 @@
     "Odłóż dziś" : {
 
     },
+    "OK" : {
+
+    },
     "Oszczędzanie" : {
+
+    },
+    "Oszczędzasz" : {
+
+    },
+    "Play Again" : {
 
     },
     "Profil" : {
@@ -107,7 +141,13 @@
     "Select Date" : {
 
     },
+    "Start Game" : {
+
+    },
     "Teraz w skarbonce masz:" : {
+
+    },
+    "Twój cel zotał dodany" : {
 
     },
     "Twoje cele oszczędnościowe" : {
@@ -116,7 +156,13 @@
     "tygodni" : {
 
     },
+    "tygodniowo" : {
+
+    },
     "Usuń cel" : {
+
+    },
+    "Validation Error" : {
 
     },
     "Wpisz nazwę Twojego celu" : {
@@ -126,6 +172,9 @@
 
     },
     "Wybierz grafikę" : {
+
+    },
+    "Wynik: %lld" : {
 
     },
     "Zapisz cel" : {

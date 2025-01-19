@@ -32,7 +32,6 @@ class GoalFormViewModel: ObservableObject {
         return !goal.name.isEmpty
             && goal.price > 0
             && goal.saved >= 0
-            && goal.icon != ""
     }
 
 }
