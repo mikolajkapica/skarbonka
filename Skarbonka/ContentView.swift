@@ -9,6 +9,7 @@ enum Tab {
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .home
+    @EnvironmentObject private var style: StyleConfig
 
     init() {
         let appearance = UITabBarAppearance()
@@ -17,38 +18,45 @@ struct ContentView: View {
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
 
+    let imagePadding: CGFloat = 40
+
     var body: some View {
         TopBar()
-        ZStack {
-            TabView(selection: $selectedTab) {
-                HomeView()
-                    .tabItem {
-                        Image(systemName: "creditcard")
-                        Text(String(localized: "Oszczędzanie"))
-                    }
-                    .tag(Tab.home)
-//                GamesView()
-//                    .tabItem {
-//                        Image(systemName: "play")
-//                        Text(String("Gry"))
-//                    }
-//                    .tag(Tab.games)
-//
-//                ProfileView()
-//                    .tabItem {
-//                        Image(systemName: "person")
-//                        Text(String("Profil"))
-//                    }
-//                    .tag(Tab.profile)
-            }
-//            LionHelper()
+        TabView(selection: $selectedTab) {
+            HomeView()
+                .tabItem {
+                    Text(String(localized: "Oszczędzanie"))
+                    Image(
+                        selectedTab == Tab.home ? "piggy-active" : "piggy")
+                }
+                .tag(Tab.home)
+            GamesView()
+                .tabItem {
+                    Image(selectedTab == Tab.games ? "play-active" : "play")
+                    Text(String(localized: "Gry"))
+                }
+                .tag(Tab.games)
+            ProfileView()
+                .tabItem {
+                    Image(
+                        selectedTab == Tab.profile
+                            ? "profile-active" : "profile"
+                    )
+                    Text(String(localized: "Profil"))
+                }
+                .tag(Tab.profile)
+        }
+        .tint(style.theme.primary)
+        .safeAreaInset(edge: VerticalEdge.bottom) {
+            LionHelper()
         }
     }
+
 }
 
 #Preview {
     let container = DataController.previewContainer
-     
+
     ContentView()
         .modelContainer(container)
         .environmentObject(Router())

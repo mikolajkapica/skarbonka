@@ -3,6 +3,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Query var goals: [GoalModel]
+    @Environment(\.modelContext) private var modelContext: ModelContext
     @EnvironmentObject var router: Router
     @EnvironmentObject var style: StyleConfig
 
@@ -12,20 +13,33 @@ struct HomeView: View {
                 VStack(spacing: 20) {
                     Text(String(localized: "Twoje cele oszczędnościowe"))
                         .font(style.typography.m)
+                        .bold()
                         .foregroundColor(style.theme.foreground)
-                    NavigationLink(destination: GoalCreateView()) {
-                        Text(String(localized: "Dodaj nowy cel"))
-                    }
+                    NavigationLink(
+                        String(localized: "Dodaj nowy cel"),
+                        value: GoalModel()
+                    )
+                    .navigationDestination(for: GoalModel.self) { _ in GoalFormView() }
                     .buttonStyle(FilledButton())
+                    .bold()
                     ForEach(goals, id: \.id) { goal in
-                        GoalSummaryWidget(goal: goal)
+                        GoalSummaryWidget(viewModel: GoalSummaryViewModel(goal: goal, modelContext: modelContext))
                     }
                 }
+                .padding(20)
             }
-            .padding(.vertical, 20)
             .frame(maxWidth: .infinity)
             .background(style.theme.backgroundGradient)
             .topBarTitle(String(localized: "Oszczędzanie"))
         }
     }
+}
+
+#Preview {
+    let container = DataController.previewContainer
+     
+    HomeView()
+        .modelContainer(container)
+        .environmentObject(Router())
+        .environmentObject(StyleConfig())
 }

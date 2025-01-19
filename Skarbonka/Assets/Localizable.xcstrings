@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "pl",
   "strings" : {
+    "%lld %@" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld %2$@"
+          }
+        }
+      }
+    },
     "addToSkarbonka" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -18,16 +28,94 @@
         }
       }
     },
+    "Anuluj" : {
+
+    },
+    "Brawo!" : {
+
+    },
+    "Brawo! Udao sie zebrac!" : {
+
+    },
+    "Cena produktu" : {
+
+    },
+    "Dalej" : {
+
+    },
     "Dodaj nowy cel" : {
 
     },
-    "Goal Summary" : {
+    "Gry" : {
+
+    },
+    "Jaką kwotę będziesz oszczędzać?" : {
+
+    },
+    "Kiedy zaczniesz oszczędzać?" : {
+
+    },
+    "Kupisz za %lld dni" : {
+
+    },
+    "Kwota" : {
+
+    },
+    "Masz już" : {
+
+    },
+    "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego." : {
+
+    },
+    "np. karty PokemonGo" : {
+
+    },
+    "Obecne oszczędności" : {
+
+    },
+    "Odłóż dziś" : {
 
     },
     "Oszczędzanie" : {
 
     },
+    "Profil" : {
+
+    },
+    "Select an Option" : {
+
+    },
+    "Select Date" : {
+
+    },
+    "Teraz w skarbonce masz:" : {
+
+    },
     "Twoje cele oszczędnościowe" : {
+
+    },
+    "Usuń cel" : {
+
+    },
+    "Wpisz nazwę Twojego celu" : {
+
+    },
+    "Wróć" : {
+
+    },
+    "Wybierz grafikę" : {
+
+    },
+    "Zapisz cel" : {
+
+    },
+    "zl" : {
+
+    },
+    "Znalazłeś się w nieodkrytym miejscu!" : {
+
+    },
+    "Zrobione" : {
 
     }
   },

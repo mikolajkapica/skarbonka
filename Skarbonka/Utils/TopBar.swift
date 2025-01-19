@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct TopBar: View {
     @ObservedObject var viewModel = TopBarViewModel.shared
     @EnvironmentObject var style: StyleConfig
@@ -16,38 +15,37 @@ struct TopBar: View {
                         .foregroundColor(style.theme.primary)
                 }
             }
-            Text(viewModel.title).font(style.typography.m)
+            Text(viewModel.title)
+                .font(style.typography.m)
+                .bold()
             Spacer()
-            Image("FaceTalking")
+            Button(action: {
+                print(router.path)
+            }) {
+                Image("FaceTalking")
+            }
             Image("Bell")
         }
-        .navigationBarBackButtonHidden(true)
         .contentMargins(0)
         .padding(16)
         .background(.white)
     }
 }
 
-struct TopBarPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        TopBar(viewModel: TopBarViewModel(title: "Skarbonka", isBack: false))
-    }
-}
-
 class TopBarViewModel: ObservableObject {
     static let shared = TopBarViewModel()
-    
+
     @Published var title: String
     @Published var isBack: Bool
 
-    init(title: String = "", isBack: Bool = false) {
+    private init(title: String = "", isBack: Bool = false) {
         self.title = title
         self.isBack = isBack
     }
 
     func handleBackAction() {
     }
-    
+
     func updateTitle(newTitle: String) {
         title = newTitle
     }
@@ -55,11 +53,11 @@ class TopBarViewModel: ObservableObject {
 
 struct TopBarTitleModifier: ViewModifier {
     var title: String
-    
+
     func body(content: Content) -> some View {
         content
             .onAppear {
-                TopBarViewModel.shared.title = title  // Update singleton title
+                TopBarViewModel.shared.title = title
             }
     }
 }
@@ -68,4 +66,11 @@ extension View {
     func topBarTitle(_ title: String) -> some View {
         self.modifier(TopBarTitleModifier(title: title))
     }
+}
+
+#Preview {
+    let viewModel = TopBarViewModel.shared
+    viewModel.title = "Title"
+    return TopBar(viewModel: viewModel)
+        .environmentObject(StyleConfig())
 }

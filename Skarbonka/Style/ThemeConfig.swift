@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ThemeConfig {
     var primary: Color
+    var gray: Color
     var foreground: Color
     var foregroundMuted: Color
     var background: Color
@@ -9,11 +10,13 @@ struct ThemeConfig {
     
     init(
         primary: Color,
+        gray: Color,
         foreground: Color,
         foregroundMuted: Color,
         background: Color
     ) {
         self.primary = primary
+        self.gray = gray
         self.foreground = foreground
         self.foregroundMuted = foregroundMuted
         self.background = background
@@ -41,6 +44,7 @@ struct FilledButton: ButtonStyle {
         let foregroundColor = self.config.theme.foreground
         configuration.label
             .padding()
+            .padding(.horizontal, 12)
             .background(backgroundColor)
             .foregroundColor(foregroundColor)
             .clipShape(Capsule())
@@ -52,11 +56,11 @@ struct FilledButton: ButtonStyle {
 struct MutedButton: ButtonStyle {
     @EnvironmentObject private var config: StyleConfig
     func makeBody(configuration: Configuration) -> some View {
-        let backgroundColor = self.config.theme.primary
-        let foregroundColor = self.config.theme.primary
+        let backgroundColor = self.config.theme.foregroundMuted
+        let foregroundColor = self.config.theme.gray
         return configuration.label
             .padding()
-            .background(backgroundColor.opacity(0.5))
+            .background(backgroundColor)
             .foregroundColor(foregroundColor)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
