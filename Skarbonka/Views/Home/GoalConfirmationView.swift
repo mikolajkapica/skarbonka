@@ -1,13 +1,15 @@
 import SwiftUI
 
 struct GoalConfirmation: View {
+    @StateObject var viewModel: GoalConfirmationViewModel
+    
     @Environment(\.modelContext) private var context
     @EnvironmentObject private var style: StyleConfig
-    @StateObject var viewModel: GoalConfirmationViewModel
     
     var goalMessage: some View {
         let msg = [
-            "Oszczędzaj ", String(viewModel.goal.savePerFrequency) + "zł",
+            "Oszczędzaj ",
+            String(viewModel.goal.savePerFrequency) + "zł",
             " tygodniowo i ciesz się z zakupu \(viewModel.goal.name) za \(viewModel.goal.price) \(String(localized: "zl"))",
         ]
         return
@@ -32,7 +34,7 @@ struct GoalConfirmation: View {
                 VStack {
                     goalMessage
                     iconView
-                    Text(viewModel.futureDateMessage)
+                    Text(viewModel.futureDateMessage ?? String(localized: "Nie udalo sie obliczyc daty"))
                 }
                 .foregroundStyle(.white)
                 .font(style.typography.m)

@@ -2,9 +2,15 @@ import SwiftData
 import SwiftUI
 
 enum Frequency: String, Codable {
-    case daily
-    case weekly
-    case monthly
+    case daily, weekly, monthly
+    
+    func toString() -> String {
+        switch self {
+        case .daily: String(localized: "dziennie")
+        case .weekly: String(localized: "tygodniowo")
+        case .monthly: String(localized: "miesiecznie")
+        }
+    }
 }
 
 @Model
@@ -24,7 +30,7 @@ class GoalModel {
         self.icon = ""
         self.price = 0
         self.frequency = Frequency.daily
-        self.savePerFrequency = 0
+        self.savePerFrequency = 20
         self.start = Date()
         self.saved = 0
     }

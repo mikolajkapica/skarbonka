@@ -12,7 +12,7 @@ struct GoalSummaryWidget: View {
                 Text("\(viewModel.goal.price) \(String(localized: "zl"))")
             }
             .bold()
-            GoalIcon(
+            GoalProgress(
                 progress: viewModel.progress,
                 icon: viewModel.goal.icon
             )

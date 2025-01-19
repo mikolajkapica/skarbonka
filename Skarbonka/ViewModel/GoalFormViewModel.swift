@@ -1,16 +1,19 @@
 import SwiftUI
 
 class GoalFormViewModel: ObservableObject {
-    @Published var goal: GoalModel = GoalModel()
-    @Published var selectedOption: String? = nil
-    @Published var isGoalCompleted: Bool = false
-    @Published var icons = [
-        "cat", "bicycle", "ticket", "puzzlepiece", "music.note", "photo",
-    ]
-    
+    @Published var goal: GoalModel
+    @Published var isGoalCompleted: Bool
+    @Published var icons: [String]
+    @Published var selectedOption: String
+
     init() {
-        goal = GoalModel()
-        goal.icon = icons.first!
+        self.goal = GoalModel()
+        self.isGoalCompleted = false
+        self.icons = [
+            "cat", "bicycle", "ticket", "puzzlepiece", "music.note", "photo",
+        ]
+        self.selectedOption = "Codziennie"
+        self.goal.icon = icons.first!
     }
 
     func updateGoalPrice(_ newValue: String) {
@@ -21,7 +24,7 @@ class GoalFormViewModel: ObservableObject {
 
     func updateCurrentSavings(_ newValue: String) {
         if let intValue = Int(newValue) {
-            goal.savePerFrequency = intValue
+            goal.saved = intValue
         }
     }
 
@@ -29,7 +32,6 @@ class GoalFormViewModel: ObservableObject {
         return !goal.name.isEmpty
             && goal.price > 0
             && goal.saved >= 0
-            && selectedOption != nil
             && goal.icon != ""
     }
 

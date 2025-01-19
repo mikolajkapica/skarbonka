@@ -7,9 +7,9 @@ func generateRandomGoal() -> GoalModel {
     
     let randomName = names.randomElement()!
     let randomIcon = icons.randomElement()!
-    let randomPrice = Int.random(in: 500...5000)
+    let randomPrice = Int.random(in: 20...300)
     let randomFrequency = frequencies.randomElement()!
-    let randomSavePerFrequency = Int.random(in: 50...500)
+    let randomSavePerFrequency = Int.random(in: 1...50)
     let randomStartDate = Date()
     let randomSaved = Int.random(in: 0...randomPrice)
     

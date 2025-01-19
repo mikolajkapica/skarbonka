@@ -1,10 +1,11 @@
 import SwiftUI
 
-struct GoalIcon: View {
+struct GoalProgress: View {
     let progress: Float
     let size: CGFloat = 150
     let lineWidth: CGFloat = 10
     var icon: String
+    
     @EnvironmentObject private var style: StyleConfig
 
     var body: some View {
@@ -32,7 +33,7 @@ struct GoalIcon: View {
 }
 
 #Preview {
-    GoalIcon(
+    GoalProgress(
         progress: 0.75,
         icon: "ticket"
     )

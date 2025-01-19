@@ -1,11 +1,10 @@
 import SwiftUI
 
 struct RadioButtonPickerView: View {
-    @Binding var selectedOption: String?
+    let options: [String]
+    @Binding var selectedOption: String
 
     @EnvironmentObject private var style: StyleConfig
-
-    let options: [String]
 
     var body: some View {
         ForEach(options, id: \.self) { option in

@@ -16,6 +16,7 @@ struct GoalFormView: View {
                 iconSelectionView
                 priceAndSavingsView
                 optionSelectionView
+                SavingsView(viewModel: SavePerFrequencyViewModel(goal: viewModel.goal))
                 startSavingDateView
                 actionButtonsView
             }
@@ -92,7 +93,7 @@ struct GoalFormView: View {
     }
 
     private var priceAndSavingsView: some View {
-        VStack {
+        VStack(spacing: 20) {
             priceFieldView
             currentSavingsFieldView
         }
@@ -126,7 +127,7 @@ struct GoalFormView: View {
             TextField(
                 "Obecne oszczędności",
                 text: Binding(
-                    get: { String(viewModel.goal.savePerFrequency) },
+                    get: { String(viewModel.goal.saved) },
                     set: { newValue in viewModel.updateCurrentSavings(newValue)
                     }
                 )
@@ -146,8 +147,8 @@ struct GoalFormView: View {
                 .foregroundColor(.white)
 
             RadioButtonPickerView(
-                selectedOption: $viewModel.selectedOption,
-                options: ["Codziennie", "Co tydzień", "Co miesiąc"]
+                options: ["Codziennie", "Co tydzień", "Co miesiąc"],
+                selectedOption: $viewModel.selectedOption
             )
         }
     }

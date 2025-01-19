@@ -8,8 +8,8 @@ struct GoalEnd: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack {
-                    Text(String("Twój cel zotał dodany"))
-                    Image(systemName: "puzzlepiece")
+                    Text(String(localized: "Twój cel zotał dodany"))
+                    Image(systemName: goal.icon)
                         .foregroundColor( style.theme.background
                         )
                         .font(.system(size: 80))
@@ -17,9 +17,9 @@ struct GoalEnd: View {
                         .background(style.theme.foreground)
                         .clipShape(Circle())
                     
-                    Text(String("Puzzle"))
-                    Text(String("80zł"))
-                    Text(String("Oszczędzasz 5 zł dziennie"))
+                    Text(goal.name)
+                    Text("\(goal.price) \(String(localized: "zl"))")
+                    Text("\(String(localized: "Oszczędzasz")) \(goal.savePerFrequency) \(String(localized: "zl")) \(goal.frequency.toString())")
                     
                 }
                 .foregroundStyle(.white)
@@ -45,6 +45,7 @@ struct GoalEnd: View {
             .padding(24)
         }
         .background(style.theme.backgroundGradient)
+        .navigationBarBackButtonHidden(true)
     }
 
 }

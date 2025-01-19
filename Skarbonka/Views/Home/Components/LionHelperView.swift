@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LionHelper: View {
     @State private var showBubble: Bool = false
+    
     @EnvironmentObject var style: StyleConfig
 
     var closeButton: some View {

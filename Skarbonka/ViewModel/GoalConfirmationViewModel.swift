@@ -11,8 +11,23 @@ class GoalConfirmationViewModel: ObservableObject {
         self.goal = goal
     }
 
-    var futureDateMessage: String {
-        return futureDate(price: goal.price, savingAmount: goal.savePerFrequency, savingFrequency: goal.frequency)
+    var futureDateMessage: String? {
+        var calculatedDays: Int {
+            let remainingAmount = max(0, Double(goal.price - goal.saved))
+            let saveFrequency = max(1, Double(goal.savePerFrequency))
+            return Int(ceil(remainingAmount / saveFrequency))
+        }
+        let dateFormat = "dd MMM"
+        let weekDays = 7
+        let today = Date()
+        if let futureDate = Calendar.current.date(byAdding: .day, value: calculatedDays, to: today) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = dateFormat
+            let formattedDate = dateFormatter.string(from: futureDate)
+            let weeks = calculatedDays / weekDays
+            return "\(String(localized: "już za")) \(weeks) \(String(localized: "tygodni")) (\(formattedDate))"
+        }
+        return nil
     }
 
     func saveGoal() {
@@ -22,20 +37,6 @@ class GoalConfirmationViewModel: ObservableObject {
             navigateToDetail = true
         } catch {
             print("Error saving goal")
-        }
-    }
-
-    func futureDate(price: Int, savingAmount: Int, savingFrequency: Frequency) -> String {
-        let daysToAdd = price / savingAmount
-        let today = Date()
-        if let futureDate = Calendar.current.date(byAdding: .day, value: daysToAdd, to: today) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd MMM"
-            let formattedDate = dateFormatter.string(from: futureDate)
-            let weeks = daysToAdd / 7
-            return "już za \(weeks) tygodni (\(formattedDate))"
-        } else {
-            return "Invalid date calculation"
         }
     }
 }
