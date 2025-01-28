@@ -31,6 +31,9 @@
         }
       }
     },
+    "%lld zł" : {
+
+    },
     "addToSkarbonka" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -162,6 +165,9 @@
     "Twoje cele oszczędnościowe" : {
 
     },
+    "Twoje oszczędności" : {
+
+    },
     "tygodni" : {
 
     },
@@ -192,7 +198,7 @@
     "zl" : {
 
     },
-    "Znalazłeś się w nieodkrytym miejscu!" : {
+    "Zmień zdjęcie" : {
 
     },
     "Zrobione" : {
