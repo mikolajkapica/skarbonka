@@ -1,12 +1,10 @@
-import Foundation
-import Swift
 import SwiftUI
 
 struct SavingsView: View {
     // MARK: - Properties
-    let savePerFrequencyBinding: Binding<Double>
-    let calculatedDays: Int
     @EnvironmentObject private var style: StyleConfig
+    @Binding var savePerFrequency: Double
+    let calculatedDays: Int
     
     // MARK: - Body
     var body: some View {
@@ -29,7 +27,7 @@ private extension SavingsView {
     
     var sliderView: some View {
         Slider(
-            value: savePerFrequencyBinding,
+            value: $savePerFrequency,
             in: 1...50,
             step: 1
         )
@@ -39,7 +37,7 @@ private extension SavingsView {
     var amountInput: some View {
         TextField(
             String(localized: "Kwota"),
-            value: savePerFrequencyBinding,
+            value: $savePerFrequency,
             formatter: NumberFormatter.currency
         )
         .keyboardType(.numberPad)
@@ -64,8 +62,8 @@ private extension SavingsView {
 // MARK: - Preview
 #Preview {
     SavingsView(
-        savePerFrequencyBinding: .constant(10),
+        savePerFrequency: .constant(10),
         calculatedDays: 10
     )
     .environmentObject(StyleConfig())
-}
+} 

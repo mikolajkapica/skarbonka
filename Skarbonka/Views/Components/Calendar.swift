@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CalendarView: View {
+struct Calendar: View {
     // MARK: - Properties
     @State private var selectedDate: Date = Date()
     @EnvironmentObject private var style: StyleConfig
@@ -20,7 +20,7 @@ struct CalendarView: View {
 }
 
 // MARK: - Components
-private extension CalendarView {
+private extension Calendar {
     var backgroundShape: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white)
@@ -30,6 +30,6 @@ private extension CalendarView {
 
 // MARK: - Preview
 #Preview {
-    CalendarView()
+    Calendar()
         .environmentObject(StyleConfig())
-}
+} 

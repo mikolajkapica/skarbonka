@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct RadioButtonPickerView: View {
+struct RadioButtonPicker: View {
     // MARK: - Properties
-    let options: [String]
-    @Binding var selectedOption: String
     @EnvironmentObject private var style: StyleConfig
+    @Binding var selectedOption: String
+    let options: [String]
     
     // MARK: - Body
     var body: some View {
@@ -15,7 +15,7 @@ struct RadioButtonPickerView: View {
 }
 
 // MARK: - Components
-private extension RadioButtonPickerView {
+private extension RadioButtonPicker {
     func radioButton(for option: String) -> some View {
         Button(action: { selectOption(option) }) {
             HStack {
@@ -31,10 +31,22 @@ private extension RadioButtonPickerView {
         Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
             .foregroundColor(style.theme.primary)
     }
-    
+}
+
+// MARK: - Actions
+private extension RadioButtonPicker {
     func selectOption(_ option: String) {
         withAnimation(.easeInOut(duration: 0.1)) {
             selectedOption = option
         }
     }
 }
+
+// MARK: - Preview
+#Preview {
+    RadioButtonPicker(
+        selectedOption: .constant("Option 1"),
+        options: ["Option 1", "Option 2", "Option 3"]
+    )
+    .environmentObject(StyleConfig())
+} 
