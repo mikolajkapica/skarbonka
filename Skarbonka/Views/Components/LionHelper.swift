@@ -82,8 +82,16 @@ private extension LionHelper {
     }
 }
 
-// MARK: - Preview
+// MARK: - Preview Helpers
+#if DEBUG
+extension LionHelperViewModel {
+    static var preview: LionHelperViewModel {
+        LionHelperViewModel()
+    }
+}
+
 #Preview {
     LionHelper()
-        .environmentObject(StyleConfig())
+        .environmentObject(StyleConfig.preview)
 }
+#endif

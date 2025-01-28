@@ -61,3 +61,15 @@ private extension GoalConfirmationViewModel {
         return dateFormatter.string(from: date)
     }
 }
+
+// MARK: - Preview Helpers
+#if DEBUG
+extension GoalConfirmationViewModel {
+    static func preview() -> GoalConfirmationViewModel {
+        GoalConfirmationViewModel(
+            goal: .preview,
+            modelContext: ModelContext(DataController.previewContainer)
+        )
+    }
+}
+#endif

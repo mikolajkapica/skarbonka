@@ -93,3 +93,44 @@ extension GoalModel {
         min(remainingAmount, savePerFrequency)
     }
 }
+
+// MARK: - Preview Helpers
+#if DEBUG
+extension GoalModel {
+    static var preview: GoalModel {
+        GoalModel(
+            name: "Sample Goal",
+            icon: "star",
+            price: 1000,
+            frequency: .daily,
+            savePerFrequency: 20,
+            start: Date(),
+            saved: 200
+        )
+    }
+    
+    static var previewCompleted: GoalModel {
+        GoalModel(
+            name: "Completed Goal",
+            icon: "checkmark.circle",
+            price: 1000,
+            frequency: .weekly,
+            savePerFrequency: 100,
+            start: Date(),
+            saved: 1000
+        )
+    }
+    
+    static var previewEmpty: GoalModel {
+        GoalModel(
+            name: "New Goal",
+            icon: "plus.circle",
+            price: 500,
+            frequency: .monthly,
+            savePerFrequency: 50,
+            start: Date(),
+            saved: 0
+        )
+    }
+}
+#endif

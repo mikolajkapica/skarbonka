@@ -14,3 +14,11 @@ struct ProfileView: View {
         .background(style.theme.backgroundGradient)
     }
 }
+
+// MARK: - Preview Helpers
+#if DEBUG
+#Preview {
+    ProfileView()
+        .environmentObject(StyleConfig.preview)
+}
+#endif

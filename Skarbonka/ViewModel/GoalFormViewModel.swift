@@ -92,3 +92,19 @@ private extension GoalFormViewModel {
         value >= 0
     }
 }
+
+// MARK: - Preview Helpers
+#if DEBUG
+extension GoalFormViewModel {
+    static func preview() -> GoalFormViewModel {
+        let viewModel = GoalFormViewModel()
+        viewModel.goal = .preview
+        viewModel.selectedOption = "Codziennie"
+        return viewModel
+    }
+    
+    static func previewEmpty() -> GoalFormViewModel {
+        GoalFormViewModel()
+    }
+}
+#endif

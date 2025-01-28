@@ -208,7 +208,18 @@ struct GamesView: View {
     }
 }
 
+// MARK: - Preview Helpers
+#if DEBUG
+extension GameState {
+    static func preview() -> GameState {
+        let state = GameState(screenHeight: UIScreen.main.bounds.height)
+        state.score = 5
+        return state
+    }
+}
+
 #Preview {
     GamesView()
-        .environmentObject(StyleConfig())
+        .environmentObject(StyleConfig.preview)
 }
+#endif

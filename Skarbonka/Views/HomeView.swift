@@ -84,11 +84,11 @@ private extension HomeView {
 }
 
 // MARK: - Preview
+#if DEBUG
 #Preview {
-    let container = DataController.previewContainer
-    
     HomeView()
-        .modelContainer(container)
-        .environmentObject(Router(modelContext: container.mainContext))
-        .environmentObject(StyleConfig())
+        .modelContainer(DataController.previewContainer)
+        .environmentObject(Router.preview())
+        .environmentObject(StyleConfig.preview)
 }
+#endif

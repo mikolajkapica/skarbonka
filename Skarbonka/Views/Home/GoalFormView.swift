@@ -174,3 +174,13 @@ private extension GoalFormView {
         router.path.removeLast()
     }
 }
+
+// MARK: - Preview
+#Preview {
+    GoalFormView(
+        viewModel: GoalFormViewModel.preview()
+    )
+    .modelContainer(DataController.previewContainer)
+    .environmentObject(Router(modelContext: DataController.previewContainer.mainContext))
+    .environmentObject(StyleConfig.preview)
+}

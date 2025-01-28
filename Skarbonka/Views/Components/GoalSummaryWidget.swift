@@ -101,15 +101,10 @@ private extension GoalSummaryWidget {
 }
 
 // MARK: - Preview
+#if DEBUG
 #Preview {
-    let container = DataController.previewContainer
-    let goal = generateRandomGoal()
-    let viewModel = GoalSummaryViewModel(
-        goal: goal,
-        modelContext: ModelContext(container)
-    )
-    
-    return GoalSummaryWidget(viewModel: viewModel)
-        .environmentObject(StyleConfig())
-        .background(StyleConfig().theme.backgroundGradient)
+    GoalSummaryWidget(viewModel: GoalSummaryViewModel.preview())
+        .environmentObject(StyleConfig.preview)
+        .background(StyleConfig.preview.theme.backgroundGradient)
 }
+#endif

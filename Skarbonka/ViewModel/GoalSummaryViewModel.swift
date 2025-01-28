@@ -49,3 +49,22 @@ private extension GoalSummaryViewModel {
         Float(saved) / Float(price)
     }
 }
+
+// MARK: - Preview Helpers
+#if DEBUG
+extension GoalSummaryViewModel {
+    static func preview() -> GoalSummaryViewModel {
+        GoalSummaryViewModel(
+            goal: .preview,
+            modelContext: ModelContext(DataController.previewContainer)
+        )
+    }
+    
+    static func previewCompleted() -> GoalSummaryViewModel {
+        GoalSummaryViewModel(
+            goal: .previewCompleted,
+            modelContext: ModelContext(DataController.previewContainer)
+        )
+    }
+}
+#endif

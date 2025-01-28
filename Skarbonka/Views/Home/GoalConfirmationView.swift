@@ -111,13 +111,10 @@ private extension GoalConfirmationView {
 
 // MARK: - Preview
 #Preview {
-    let container = DataController.previewContainer
-    let goal = generateRandomGoal()
     GoalConfirmationView(
-        viewModel: GoalConfirmationViewModel(
-            goal: goal, modelContext: container.mainContext)
+        viewModel: GoalConfirmationViewModel.preview()
     )
-    .modelContainer(container)
-    .environmentObject(Router(modelContext: container.mainContext))
-    .environmentObject(StyleConfig())
+    .modelContainer(DataController.previewContainer)
+    .environmentObject(Router(modelContext: DataController.previewContainer.mainContext))
+    .environmentObject(StyleConfig.preview)
 }

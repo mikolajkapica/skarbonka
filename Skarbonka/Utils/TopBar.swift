@@ -94,3 +94,20 @@ extension View {
     return TopBar(viewModel: viewModel)
         .environmentObject(StyleConfig())
 }
+
+// MARK: - Preview Helpers
+#if DEBUG
+extension TopBarViewModel {
+    static var preview: TopBarViewModel {
+        let viewModel = TopBarViewModel.shared
+        viewModel.title = "Preview Title"
+        return viewModel
+    }
+}
+
+#Preview {
+    TopBar(viewModel: TopBarViewModel.preview)
+        .environmentObject(StyleConfig.preview)
+        .environmentObject(Router.preview())
+}
+#endif

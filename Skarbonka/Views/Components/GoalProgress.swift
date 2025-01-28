@@ -45,8 +45,24 @@ private extension GoalProgress {
     }
 }
 
-// MARK: - Preview
-#Preview {
-    GoalProgress(progress: 0.75, icon: "ticket")
-        .environmentObject(StyleConfig())
+// MARK: - Preview Helpers
+#if DEBUG
+extension GoalProgress {
+    static var preview: GoalProgress {
+        GoalProgress(progress: 0.75, icon: "ticket")
+    }
+    
+    static var previewEmpty: GoalProgress {
+        GoalProgress(progress: 0.0, icon: "star")
+    }
+    
+    static var previewFull: GoalProgress {
+        GoalProgress(progress: 1.0, icon: "checkmark.circle")
+    }
 }
+
+#Preview {
+    GoalProgress.preview
+        .environmentObject(StyleConfig.preview)
+}
+#endif

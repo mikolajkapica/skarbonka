@@ -53,3 +53,12 @@ extension Router {
     }
 }
 
+// MARK: - Preview Helpers
+#if DEBUG
+extension Router {
+    static func preview() -> Router {
+        Router(modelContext: ModelContext(DataController.previewContainer))
+    }
+}
+#endif
+
