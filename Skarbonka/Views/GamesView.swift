@@ -146,7 +146,7 @@ struct GamesView: View {
                         .font(.largeTitle)
                         .bold()
                     
-                    Button("Start Game") {
+                    Button(String(localized: "Zacznij grę")) {
                         gameState.startGame()
                     }
                     .buttonStyle(FilledButton())
@@ -167,7 +167,7 @@ struct GamesView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Wynik: \(gameState.score)")
+                        Text(String(localized: "Wynik: \(gameState.score)"))
                             .foregroundStyle(.white)
                             .font(.title)
                             .padding()
@@ -177,14 +177,14 @@ struct GamesView: View {
                     
                     if gameState.isGameOver {
                         VStack {
-                            Text("Game Over!")
+                            Text(String(localized: "Koniec gry!"))
                                 .font(.largeTitle)
                                 .bold()
                             
-                            Text("Final Score: \(gameState.score)")
+                            Text(String(localized: "Wynik: \(gameState.score)"))
                                 .font(.title)
                             
-                            Button("Play Again") {
+                            Button(String(localized: "Zagraj ponownie")) {
                                 gameState.startGame()
                             }
                             .buttonStyle(FilledButton())
@@ -204,7 +204,7 @@ struct GamesView: View {
                 }
             }
         }
-        .topBarTitle("Gry")
+        .topBarTitle(String(localized: "Gry"))
     }
 }
 
