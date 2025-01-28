@@ -1,13 +1,22 @@
 import SwiftUI
 
+// MARK: - Typography Configuration
 struct TypographyConfig {
-    var xxxl: Font
-    var xxl: Font
-    var xl: Font
-    var l: Font
-    var ml: Font
-    var m: Font
-    var s: Font
-    var xs: Font
-    var fontDesign: Font.Design
+    // MARK: - Properties
+    let xxxl: Font
+    let xxl: Font
+    let xl: Font
+    let l: Font
+    let ml: Font
+    let m: Font
+    let s: Font
+    let xs: Font
+    let fontDesign: Font.Design
+}
+
+// MARK: - Font Helpers
+extension TypographyConfig {
+    func customFont(size: CGFloat) -> Font {
+        .system(size: size, design: fontDesign)
+    }
 }

@@ -1,13 +1,16 @@
 import SwiftUI
 
+// MARK: - Theme Configuration
 struct ThemeConfig {
-    var primary: Color
-    var gray: Color
-    var foreground: Color
-    var foregroundMuted: Color
-    var background: Color
+    // MARK: - Properties
+    let primary: Color
+    let gray: Color
+    let foreground: Color
+    let foregroundMuted: Color
+    let background: Color
     let backgroundGradient: LinearGradient
     
+    // MARK: - Initialization
     init(
         primary: Color,
         gray: Color,
@@ -20,14 +23,18 @@ struct ThemeConfig {
         self.foreground = foreground
         self.foregroundMuted = foregroundMuted
         self.background = background
-        self.backgroundGradient = LinearGradient(
+        self.backgroundGradient = Self.createGradient(from: background)
+    }
+}
+
+// MARK: - Private Methods
+private extension ThemeConfig {
+    static func createGradient(from color: Color) -> LinearGradient {
+        LinearGradient(
             stops: [
-                Gradient.Stop(
-                    color: background,
-                    location: 0.00
-                ),
-                Gradient.Stop(
-                    color: background.mix(with: .black, by: 0.2),
+                .init(color: color, location: 0.00),
+                .init(
+                    color: color.mix(with: .black, by: 0.2),
                     location: 1.00
                 ),
             ],
@@ -37,16 +44,16 @@ struct ThemeConfig {
     }
 }
 
+// MARK: - Button Styles
 struct FilledButton: ButtonStyle {
     @EnvironmentObject private var config: StyleConfig
+    
     func makeBody(configuration: Configuration) -> some View {
-        let backgroundColor = self.config.theme.primary
-        let foregroundColor = self.config.theme.foreground
         configuration.label
             .padding()
             .padding(.horizontal, 12)
-            .background(backgroundColor)
-            .foregroundColor(foregroundColor)
+            .background(config.theme.primary)
+            .foregroundColor(config.theme.foreground)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
             .animation(.spring(), value: configuration.isPressed)
@@ -55,13 +62,12 @@ struct FilledButton: ButtonStyle {
 
 struct MutedButton: ButtonStyle {
     @EnvironmentObject private var config: StyleConfig
+    
     func makeBody(configuration: Configuration) -> some View {
-        let backgroundColor = self.config.theme.foregroundMuted
-        let foregroundColor = self.config.theme.gray
-        return configuration.label
+        configuration.label
             .padding()
-            .background(backgroundColor)
-            .foregroundColor(foregroundColor)
+            .background(config.theme.foregroundMuted)
+            .foregroundColor(config.theme.gray)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
             .animation(.spring(), value: configuration.isPressed)
@@ -70,15 +76,17 @@ struct MutedButton: ButtonStyle {
 
 struct BorderButton: ButtonStyle {
     @EnvironmentObject private var config: StyleConfig
+    
     func makeBody(configuration: Configuration) -> some View {
-        let backgroundColor = self.config.theme.primary
-        let foregroundColor = self.config.theme.primary
-        return configuration.label
+        configuration.label
             .padding()
             .background(Color.clear)
-            .foregroundColor(foregroundColor)
+            .foregroundColor(config.theme.primary)
             .clipShape(Capsule())
-            .overlay(Capsule().stroke(backgroundColor, lineWidth: 2))
+            .overlay(
+                Capsule()
+                    .stroke(config.theme.primary, lineWidth: 2)
+            )
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
             .animation(.spring(), value: configuration.isPressed)
     }
@@ -86,12 +94,12 @@ struct BorderButton: ButtonStyle {
 
 struct NoneButton: ButtonStyle {
     @EnvironmentObject private var config: StyleConfig
+    
     func makeBody(configuration: Configuration) -> some View {
-        let foregroundColor = self.config.theme.primary
-        return configuration.label
+        configuration.label
             .padding()
             .background(Color.clear)
-            .foregroundColor(foregroundColor)
+            .foregroundColor(config.theme.primary)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
             .animation(.spring(), value: configuration.isPressed)
