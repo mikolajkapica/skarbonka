@@ -2,6 +2,7 @@ import Testing
 import SwiftData
 @testable import Skarbonka
 
+@MainActor
 struct GoalSummaryViewModelTests {
     @Test func testProgressCalculation() throws {
         // Given
