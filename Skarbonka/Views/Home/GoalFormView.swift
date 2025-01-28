@@ -28,10 +28,15 @@ struct GoalFormView: View {
         }
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
-        .navigationDestination(for: String.self) { _ in
-            GoalConfirmation(
-                viewModel: GoalConfirmationViewModel(
-                    context: modelContext, goal: viewModel.goal))
+        .navigationDestination(for: Route.self) { route in
+            switch route {
+            case .GoalConfirmation(let goal):
+                GoalConfirmation(
+                    viewModel: GoalConfirmationViewModel(
+                        context: modelContext, goal: goal))
+            default:
+                EmptyView()
+            }
         }
         .toolbar {
             ToolbarItem(placement: .keyboard) {
@@ -200,10 +205,14 @@ struct GoalFormView: View {
 
     private var actionButtonsView: some View {
         VStack(spacing: 16) {
-            NavigationLink(
-                String("Dalej"),
-                value: "goalConfirmation"
-            ).frame(maxWidth: .infinity)
+            Button(
+                action: {
+                    router.navigateTo(to: Route.GoalConfirmation(goal: viewModel.goal))
+                }
+            ) {
+                Text("Dalej").frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity)
             .buttonStyle(FilledButton())
             .disabled(!viewModel.isGoalValid(
                 name: goalName,
