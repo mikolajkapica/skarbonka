@@ -39,10 +39,11 @@ struct HomeView: View {
                 case .goalForm:
                     GoalFormView()
                 case .goalConfirmation(let goal):
-                    GoalConfirmationView(
-                        viewModel: GoalConfirmationViewModel(
-                            context: modelContext, goal: goal))
-
+                    if let viewModel: GoalConfirmationViewModel =
+                        router.getViewModel(for: .goalConfirmation(goal: goal))
+                    {
+                        GoalConfirmationView(viewModel: viewModel)
+                    }
                 case .goalEnd(let goal):
                     GoalEndView(goal: goal)
                 default:

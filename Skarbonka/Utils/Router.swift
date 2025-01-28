@@ -31,7 +31,7 @@ class Router: ObservableObject {
         case .goalForm:
             return GoalFormViewModel()
         case .goalConfirmation(let goal):
-            return GoalConfirmationViewModel(context: modelContext, goal: goal)
+            return GoalConfirmationViewModel(goal: goal)
         default:
             return nil
         }

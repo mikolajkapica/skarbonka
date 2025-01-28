@@ -49,8 +49,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    let container = DataController.previewContainer
-
+    let container = DataController.createContainer(isPreview: true)
     ContentView()
         .modelContainer(container)
         .environmentObject(Router())

@@ -3,11 +3,10 @@ import SwiftData
 
 class GoalConfirmationViewModel: ObservableObject {
     @Published var navigateToDetail: Bool = false
-    private var context: ModelContext
+    @Environment(\.modelContext) private var context: ModelContext
     var goal: GoalModel
 
-    init(context: ModelContext, goal: GoalModel) {
-        self.context = context
+    init(goal: GoalModel) {
         self.goal = goal
     }
 
