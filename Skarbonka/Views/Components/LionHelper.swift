@@ -1,15 +1,45 @@
 import SwiftUI
 
 class LionHelperViewModel: ObservableObject {
-    let message = String(
-        localized: "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego."
-    )
+    // MARK: - Singleton
+    static let shared = LionHelperViewModel()
+    
+    // MARK: - Published Properties
+    @Published var message: String
+    
+    // MARK: - Initialization
+    private init() {
+        self.message = String(
+            localized: "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego."
+        )
+    }
+    
+    // MARK: - Public Methods
+    func updateMessage(_ newMessage: String) {
+        message = String(localized: newMessage)
+    }
+}
+
+struct LionMessageModifier: ViewModifier {
+    let message: String
+    
+    func body(content: Content) -> some View {
+        content.onAppear {
+            LionHelperViewModel.shared.updateMessage(message)
+        }
+    }
+}
+
+extension View {
+    func lionMessage(_ message: String) -> some View {
+        modifier(LionMessageModifier(message: message))
+    }
 }
 
 struct LionHelper: View {
     // MARK: - Properties
     @State private var showBubble: Bool = false
-    @ObservedObject private var viewModel = LionHelperViewModel()
+    @ObservedObject private var viewModel = LionHelperViewModel.shared
     @EnvironmentObject private var style: StyleConfig
     
     // MARK: - Body
@@ -86,7 +116,7 @@ private extension LionHelper {
 #if DEBUG
 extension LionHelperViewModel {
     static var preview: LionHelperViewModel {
-        LionHelperViewModel()
+        shared
     }
 }
 
