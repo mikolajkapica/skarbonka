@@ -36,7 +36,7 @@ struct GoalFormView: View {
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
         .toolbar { toolbarContent }
-        .topBarTitle("Oszczędności")
+        .topBarTitle(String(localized: "Oszczędności"))
     }
 }
 
@@ -61,8 +61,8 @@ private extension GoalFormView {
 private extension GoalFormView {
     var goalNameFieldView: some View {
         FormField(
-            title: "Wpisz nazwę Twojego celu",
-            placeholder: "np. karty PokemonGo",
+            title: String(localized: "Wpisz nazwę Twojego celu"),
+            placeholder: String(localized: "np. karty PokemonGo"),
             text: $goalName,
             error: viewModel.goalNameError
         ) {
@@ -89,8 +89,8 @@ private extension GoalFormView {
     
     var priceFieldView: some View {
         FormField(
-            title: "Cena produktu",
-            placeholder: "Wprowadź cenę",
+            title: String(localized: "Cena produktu"),
+            placeholder: String(localized: "Wprowadź cenę"),
             text: $goalPrice,
             error: viewModel.goalPriceError,
             keyboardType: .numberPad
@@ -103,8 +103,8 @@ private extension GoalFormView {
     
     var currentSavingsFieldView: some View {
         FormField(
-            title: "Teraz w skarbonce masz:",
-            placeholder: "Obecne oszczędności",
+            title: String(localized: "Teraz w skarbonce masz:"),
+            placeholder: String(localized: "Obecne oszczędności"),
             text: $currentSavings,
             error: viewModel.currentSavingsError,
             keyboardType: .numberPad
@@ -117,7 +117,7 @@ private extension GoalFormView {
     
     var optionSelectionView: some View {
         VStack(alignment: .leading) {
-            Text(String(localized: "Jak często będziesz oszczędzal?"))
+            Text(String(localized: "Jak często będziesz oszczędzał?"))
                 .font(.headline)
                 .foregroundColor(.white)
                 .accessibilityIdentifier("frequencyPickerTitle")
@@ -149,7 +149,8 @@ private extension GoalFormView {
     var actionButtonsView: some View {
         VStack(spacing: 16) {
             Button(action: navigateToConfirmation) {
-                Text(String(localized: "Dalej")).frame(maxWidth: .infinity)
+                Text(String(localized: "Dalej"))
+                    .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
             .buttonStyle(FilledButton())
@@ -157,7 +158,8 @@ private extension GoalFormView {
             .accessibilityIdentifier("confirmButton")
             
             Button(action: dismissForm) {
-                Text(String(localized: "Anuluj")).frame(maxWidth: .infinity)
+                Text(String(localized: "Anuluj"))
+                    .frame(maxWidth: .infinity)
             }
             .buttonStyle(MutedButton())
             .frame(maxWidth: .infinity)

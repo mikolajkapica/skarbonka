@@ -31,9 +31,6 @@
         }
       }
     },
-    "%lld zł" : {
-
-    },
     "addToSkarbonka" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -58,6 +55,9 @@
 
     },
     "Brawo! Udao sie zebrac!" : {
+
+    },
+    "Cena produktu" : {
 
     },
     "Co miesiąc" : {
@@ -93,7 +93,7 @@
     "Gry" : {
 
     },
-    "Jak często będziesz oszczędzal?" : {
+    "Jak często będziesz oszczędzał?" : {
 
     },
     "Jaką kwotę będziesz oszczędzać?" : {
@@ -132,7 +132,16 @@
     "Nie udalo sie obliczyc daty" : {
 
     },
+    "np. karty PokemonGo" : {
+
+    },
+    "Obecne oszczędności" : {
+
+    },
     "Odłóż dziś" : {
+
+    },
+    "Oszczędności" : {
 
     },
     "Oszczędzaj " : {
@@ -159,6 +168,9 @@
     "Start Game" : {
 
     },
+    "Teraz w skarbonce masz:" : {
+
+    },
     "Twój cel zotał dodany" : {
 
     },
@@ -175,6 +187,12 @@
 
     },
     "Usuń cel" : {
+
+    },
+    "Wpisz nazwę Twojego celu" : {
+
+    },
+    "Wprowadź cenę" : {
 
     },
     "Wróć" : {
@@ -196,6 +214,9 @@
 
     },
     "zl" : {
+
+    },
+    "zł" : {
 
     },
     "Zmień zdjęcie" : {
