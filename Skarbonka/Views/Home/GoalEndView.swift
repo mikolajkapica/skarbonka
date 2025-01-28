@@ -3,6 +3,7 @@ import SwiftUI
 struct GoalEnd: View {
     let goal: GoalModel
     @EnvironmentObject private var style: StyleConfig
+    @EnvironmentObject private var router: Router
 
     var body: some View {
         VStack(spacing: 0) {
@@ -29,9 +30,9 @@ struct GoalEnd: View {
                 .padding(.vertical)
                 
                 VStack(spacing: 16) {
-                    NavigationLink(
-                        destination: HomeView()
-                    ) {
+                    Button(action: {
+                        router.removeAll()
+                    }) {
                         Text("Wróć")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -47,10 +48,10 @@ struct GoalEnd: View {
         .background(style.theme.backgroundGradient)
         .navigationBarBackButtonHidden(true)
     }
-
 }
 
 #Preview {
     GoalEnd(goal: generateRandomGoal())
         .environmentObject(StyleConfig())
+        .environmentObject(Router())
 }

@@ -1,4 +1,8 @@
 import SwiftUI
 class Router: ObservableObject {
-    @Published var path: NavigationPath = NavigationPath()
+    @Published var path: NavigationPath = NavigationPath()	
+    
+    func removeAll() {
+        path = NavigationPath()
+    }
 }
