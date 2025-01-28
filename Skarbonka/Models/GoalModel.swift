@@ -79,11 +79,6 @@ class GoalModel {
 
 // MARK: - Goal Model Helpers
 extension GoalModel {
-    func calculateDaysToComplete() -> Int {
-        let remainingAmount = Double(price - saved)
-        let saveFrequency = Double(savePerFrequency)
-        return Int(ceil(remainingAmount / saveFrequency))
-    }
     
     func isCompleted() -> Bool {
         saved >= price
