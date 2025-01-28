@@ -68,6 +68,7 @@ private extension GoalFormView {
             viewModel.updateGoalName($0)
         }
         .focused($focusedField, equals: .int)
+        .accessibilityIdentifier("goalNameField")
     }
     
     var iconSelectionView: some View {
@@ -96,6 +97,7 @@ private extension GoalFormView {
             viewModel.updateGoalPrice($0)
         }
         .focused($focusedField, equals: .int)
+        .accessibilityIdentifier("goalPriceField")
     }
     
     var currentSavingsFieldView: some View {
@@ -109,6 +111,7 @@ private extension GoalFormView {
             viewModel.updateCurrentSavings($0)
         }
         .focused($focusedField, equals: .int)
+        .accessibilityIdentifier("currentSavingsField")
     }
     
     var optionSelectionView: some View {
@@ -116,15 +119,19 @@ private extension GoalFormView {
             Text(String(localized: "Jak często będziesz oszczędzal?"))
                 .font(.headline)
                 .foregroundColor(.white)
+                .accessibilityIdentifier("frequencyPickerTitle")
             
-            RadioButtonPicker(
-                selectedOption: $viewModel.selectedOption,
-                options: [
-                    String(localized: "Codziennie"),
-                    String(localized: "Co tydzień"),
-                    String(localized: "Co miesiąc")
-                ]
-            )
+            VStack {
+                RadioButtonPicker(
+                    selectedOption: $viewModel.selectedOption,
+                    options: [
+                        String(localized: "Codziennie"),
+                        String(localized: "Co tydzień"),
+                        String(localized: "Co miesiąc")
+                    ]
+                )
+            }
+            .accessibilityIdentifier("frequencyPicker")
         }
     }
     
@@ -146,12 +153,14 @@ private extension GoalFormView {
             .frame(maxWidth: .infinity)
             .buttonStyle(FilledButton())
             .disabled(!isFormValid)
+            .accessibilityIdentifier("confirmButton")
             
             Button(action: dismissForm) {
                 Text(String(localized: "Anuluj")).frame(maxWidth: .infinity)
             }
             .buttonStyle(MutedButton())
             .frame(maxWidth: .infinity)
+            .accessibilityIdentifier("cancelButton")
         }
     }
 }

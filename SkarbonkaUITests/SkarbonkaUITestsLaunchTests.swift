@@ -1,10 +1,3 @@
-//
-//  skarbonkaUITestsLaunchTests.swift
-//  skarbonkaUITests
-//
-//  Created by stud on 29/10/2024.
-//
-
 import XCTest
 
 final class SkarbonkaUITestsLaunchTests: XCTestCase {

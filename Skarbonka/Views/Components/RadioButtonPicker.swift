@@ -8,8 +8,11 @@ struct RadioButtonPicker: View {
     
     // MARK: - Body
     var body: some View {
-        ForEach(options, id: \.self) { option in
-            radioButton(for: option)
+        VStack(spacing: 12) {
+            ForEach(options, id: \.self) { option in
+                radioButton(for: option)
+                    .accessibilityIdentifier("radio\(option.replacingOccurrences(of: " ", with: ""))")
+            }
         }
     }
 }

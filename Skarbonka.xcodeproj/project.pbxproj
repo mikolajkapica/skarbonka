@@ -11,14 +11,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A1D9864F2CD0D50C008C5B76 /* PBXContainerItemProxy */ = {
+		6FDC89962D496A76003B04CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A1D986342CD0D50A008C5B76 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = A1D9863B2CD0D50A008C5B76;
-			remoteInfo = skarbonka;
+			remoteInfo = Skarbonka;
 		};
-		A1D986592CD0D50C008C5B76 /* PBXContainerItemProxy */ = {
+		A1D9864F2CD0D50C008C5B76 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A1D986342CD0D50A008C5B76 /* Project object */;
 			proxyType = 1;
@@ -28,12 +28,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6FDC89902D496A76003B04CA /* SkarbonkaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkarbonkaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D9863C2CD0D50A008C5B76 /* Skarbonka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Skarbonka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D9864E2CD0D50C008C5B76 /* SkarbonkaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkarbonkaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1D986582CD0D50C008C5B76 /* SkarbonkaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SkarbonkaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6FDC89912D496A76003B04CA /* SkarbonkaUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SkarbonkaUITests;
+			sourceTree = "<group>";
+		};
 		A1D9863E2CD0D50A008C5B76 /* Skarbonka */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Skarbonka;
@@ -44,14 +49,16 @@
 			path = SkarbonkaTests;
 			sourceTree = "<group>";
 		};
-		A1D9865B2CD0D50C008C5B76 /* SkarbonkaUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SkarbonkaUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6FDC898D2D496A76003B04CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1D986392CD0D50A008C5B76 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -67,13 +74,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1D986552CD0D50C008C5B76 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +82,7 @@
 			children = (
 				A1D9863E2CD0D50A008C5B76 /* Skarbonka */,
 				A1D986512CD0D50C008C5B76 /* SkarbonkaTests */,
-				A1D9865B2CD0D50C008C5B76 /* SkarbonkaUITests */,
+				6FDC89912D496A76003B04CA /* SkarbonkaUITests */,
 				A1D9863D2CD0D50A008C5B76 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,7 +92,7 @@
 			children = (
 				A1D9863C2CD0D50A008C5B76 /* Skarbonka.app */,
 				A1D9864E2CD0D50C008C5B76 /* SkarbonkaTests.xctest */,
-				A1D986582CD0D50C008C5B76 /* SkarbonkaUITests.xctest */,
+				6FDC89902D496A76003B04CA /* SkarbonkaUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,6 +100,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6FDC898F2D496A76003B04CA /* SkarbonkaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FDC89982D496A76003B04CA /* Build configuration list for PBXNativeTarget "SkarbonkaUITests" */;
+			buildPhases = (
+				6FDC898C2D496A76003B04CA /* Sources */,
+				6FDC898D2D496A76003B04CA /* Frameworks */,
+				6FDC898E2D496A76003B04CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6FDC89972D496A76003B04CA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6FDC89912D496A76003B04CA /* SkarbonkaUITests */,
+			);
+			name = SkarbonkaUITests;
+			packageProductDependencies = (
+			);
+			productName = SkarbonkaUITests;
+			productReference = 6FDC89902D496A76003B04CA /* SkarbonkaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		A1D9863B2CD0D50A008C5B76 /* Skarbonka */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1D986622CD0D50C008C5B76 /* Build configuration list for PBXNativeTarget "Skarbonka" */;
@@ -146,29 +169,6 @@
 			productReference = A1D9864E2CD0D50C008C5B76 /* SkarbonkaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A1D986572CD0D50C008C5B76 /* SkarbonkaUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A1D986682CD0D50C008C5B76 /* Build configuration list for PBXNativeTarget "SkarbonkaUITests" */;
-			buildPhases = (
-				A1D986542CD0D50C008C5B76 /* Sources */,
-				A1D986552CD0D50C008C5B76 /* Frameworks */,
-				A1D986562CD0D50C008C5B76 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A1D9865A2CD0D50C008C5B76 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				A1D9865B2CD0D50C008C5B76 /* SkarbonkaUITests */,
-			);
-			name = SkarbonkaUITests;
-			packageProductDependencies = (
-			);
-			productName = skarbonkaUITests;
-			productReference = A1D986582CD0D50C008C5B76 /* SkarbonkaUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -176,17 +176,17 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					6FDC898F2D496A76003B04CA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = A1D9863B2CD0D50A008C5B76;
+					};
 					A1D9863B2CD0D50A008C5B76 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 					A1D9864D2CD0D50C008C5B76 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = A1D9863B2CD0D50A008C5B76;
-					};
-					A1D986572CD0D50C008C5B76 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = A1D9863B2CD0D50A008C5B76;
 					};
@@ -212,12 +212,19 @@
 			targets = (
 				A1D9863B2CD0D50A008C5B76 /* Skarbonka */,
 				A1D9864D2CD0D50C008C5B76 /* SkarbonkaTests */,
-				A1D986572CD0D50C008C5B76 /* SkarbonkaUITests */,
+				6FDC898F2D496A76003B04CA /* SkarbonkaUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6FDC898E2D496A76003B04CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1D9863A2CD0D50A008C5B76 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -232,16 +239,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1D986562CD0D50C008C5B76 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6FDC898C2D496A76003B04CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
 		A1D986382CD0D50A008C5B76 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,29 +263,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1D986542CD0D50C008C5B76 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6FDC89972D496A76003B04CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1D9863B2CD0D50A008C5B76 /* Skarbonka */;
+			targetProxy = 6FDC89962D496A76003B04CA /* PBXContainerItemProxy */;
+		};
 		A1D986502CD0D50C008C5B76 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A1D9863B2CD0D50A008C5B76 /* Skarbonka */;
 			targetProxy = A1D9864F2CD0D50C008C5B76 /* PBXContainerItemProxy */;
 		};
-		A1D9865A2CD0D50C008C5B76 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A1D9863B2CD0D50A008C5B76 /* Skarbonka */;
-			targetProxy = A1D986592CD0D50C008C5B76 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		6FDC89992D496A76003B04CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pwr.kapica.mikolaj.SkarbonkaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Skarbonka;
+			};
+			name = Debug;
+		};
+		6FDC899A2D496A76003B04CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pwr.kapica.mikolaj.SkarbonkaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Skarbonka;
+			};
+			name = Release;
+		};
 		A1D986602CD0D50C008C5B76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -494,41 +528,18 @@
 			};
 			name = Release;
 		};
-		A1D986692CD0D50C008C5B76 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = pwr.kapica.mikolaj.skarbonkaUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = skarbonka;
-			};
-			name = Debug;
-		};
-		A1D9866A2CD0D50C008C5B76 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = pwr.kapica.mikolaj.skarbonkaUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = skarbonka;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6FDC89982D496A76003B04CA /* Build configuration list for PBXNativeTarget "SkarbonkaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FDC89992D496A76003B04CA /* Debug */,
+				6FDC899A2D496A76003B04CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A1D986372CD0D50A008C5B76 /* Build configuration list for PBXProject "Skarbonka" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -552,15 +563,6 @@
 			buildConfigurations = (
 				A1D986662CD0D50C008C5B76 /* Debug */,
 				A1D986672CD0D50C008C5B76 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A1D986682CD0D50C008C5B76 /* Build configuration list for PBXNativeTarget "SkarbonkaUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1D986692CD0D50C008C5B76 /* Debug */,
-				A1D9866A2CD0D50C008C5B76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

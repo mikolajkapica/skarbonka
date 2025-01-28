@@ -15,7 +15,11 @@ struct HomeView: View {
                 VStack(spacing: 20) {
                     headerView
                     addGoalButton
-                    goalsList
+                    if goals.isEmpty {
+                        noGoalsView
+                    } else {
+                        goalsList
+                    }
                 }
                 .padding(20)
             }
@@ -50,6 +54,7 @@ private extension HomeView {
         }
         .buttonStyle(FilledButton())
         .bold()
+        .accessibilityIdentifier("addNewGoalButton")
     }
     
     var goalsList: some View {
@@ -61,6 +66,14 @@ private extension HomeView {
                 )
             )
         }
+    }
+    
+    var noGoalsView: some View {
+        Text("Nie masz jeszcze żadnych celów")
+            .font(style.typography.m)
+            .foregroundColor(style.theme.foreground)
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 40)
     }
 }
 

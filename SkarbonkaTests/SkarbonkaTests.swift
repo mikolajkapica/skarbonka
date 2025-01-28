@@ -1,10 +1,3 @@
-//
-//  skarbonkaTests.swift
-//  skarbonkaTests
-//
-//  Created by stud on 29/10/2024.
-//
-
 import Testing
 @testable import Skarbonka
 

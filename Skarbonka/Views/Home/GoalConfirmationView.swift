@@ -82,6 +82,7 @@ private extension GoalConfirmationView {
                 .background(style.theme.primary)
                 .cornerRadius(.infinity)
         }
+        .accessibilityIdentifier("saveButton")
     }
 
     var cancelButton: some View {
