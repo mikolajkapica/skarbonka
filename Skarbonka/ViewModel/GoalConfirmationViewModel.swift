@@ -25,7 +25,11 @@ class GoalConfirmationViewModel: ObservableObject {
             dateFormatter.dateFormat = dateFormat
             let formattedDate = dateFormatter.string(from: futureDate)
             let weeks = calculatedDays / weekDays
-            return "\(String(localized: "już za")) \(weeks) \(String(localized: "tygodni")) (\(formattedDate))"
+            if (weeks == 0) {
+                return "\(String(localized: "za")) \(calculatedDays) \(String(localized: "dni")) (\(formattedDate))"
+            } else {
+                return "\(String(localized: "już za")) \(weeks) \(String(localized: "tygodni")) (\(formattedDate))"
+            }
         }
         return nil
     }

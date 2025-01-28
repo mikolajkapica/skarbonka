@@ -18,48 +18,59 @@ class GoalFormViewModel: ObservableObject {
         self.selectedOption = "Codziennie"
         self.goal.icon = icons.first!
     }
-
-    func validateGoalName() {
-        DispatchQueue.main.async {
-            self.goalNameError =
-                self.goal.name.isEmpty ? "Goal name cannot be empty" : nil
+    
+    func updateGoalName(_ newValue: String) {
+        goal.name = newValue
+        if (!validateGoalName(newValue)) {
+            goalNameError = "Nazwa celu nie może być pusta"
+        } else {
+            goalNameError = nil
         }
-    }
-
-    func validateGoalPrice() {
-        DispatchQueue.main.async {
-            self.goalPriceError =
-                self.goal.price <= 0 ? "Price must be greater than zero" : nil
-        }
-    }
-
-    func validateCurrentSavings() {
-        DispatchQueue.main.async {
-
-            self.currentSavingsError =
-                self.goal.saved < 0 ? "Savings cannot be negative" : nil
-        }
-    }
-
-    func isGoalValid() -> Bool {
-        validateGoalName()
-        validateGoalPrice()
-        validateCurrentSavings()
-        return goalNameError == nil && goalPriceError == nil
-            && currentSavingsError == nil
     }
 
     func updateGoalPrice(_ newValue: String) {
         if let intValue = Int(newValue) {
             goal.price = intValue
-            validateGoalPrice()
+            if (!validateGoalPrice(intValue)) {
+                goalPriceError = "Cena musi być większa od 0"
+            } else {
+                goalPriceError = nil
+            }
+        } else {
+            goalPriceError = "Cena musi być liczbą"
         }
     }
 
     func updateCurrentSavings(_ newValue: String) {
         if let intValue = Int(newValue) {
             goal.saved = intValue
-            validateCurrentSavings()
+            if (!validateCurrentSavings(intValue)) {
+                currentSavingsError = "Oszczędności nie mogą być ujemne"
+            } else {
+                currentSavingsError = nil
+            }   
+        } else {
+            currentSavingsError = "Oszczędności muszą być liczbą"
         }
+    }
+
+    func validateGoalName(_ value: String) -> Bool {
+        return !value.isEmpty
+    }
+
+    func validateGoalPrice(_ value: Int) -> Bool {
+        return value > 0
+    }
+
+    func validateCurrentSavings(_ value: Int) -> Bool {
+        return value >= 0
+    }
+
+    func isGoalValid(name: String, price: String, savings: String) -> Bool {
+        if let intPrice = Int(price), let intSavings = Int(savings) {
+            return validateGoalName(name) && validateGoalPrice(intPrice)
+                && validateCurrentSavings(intSavings)
+        }
+        return false
     }
 }

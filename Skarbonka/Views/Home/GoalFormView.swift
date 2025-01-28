@@ -6,6 +6,10 @@ struct GoalFormView: View {
     @EnvironmentObject private var router: Router
     @Environment(\.modelContext) private var modelContext
 
+    @State private var goalName: String = ""
+    @State private var goalPrice: String = ""
+    @State private var currentSavings: String = ""
+
     enum FocusedField { case int, dec }
     @FocusState private var focusedField: FocusedField?
 
@@ -24,7 +28,7 @@ struct GoalFormView: View {
         }
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
-        .navigationDestination(isPresented: $viewModel.isGoalCompleted) {
+        .navigationDestination(for: String.self) { _ in
             GoalConfirmation(
                 viewModel: GoalConfirmationViewModel(
                     context: modelContext, goal: viewModel.goal))
@@ -50,13 +54,14 @@ struct GoalFormView: View {
                 .foregroundColor(.white)
                 .font(.headline)
 
-            TextField("np. karty PokemonGo", text: $viewModel.goal.name, onEditingChanged: { _ in
-                viewModel.validateGoalName()
-            })
-            .focused($focusedField, equals: FocusedField.int)
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(.infinity)
+            TextField("np. karty PokemonGo", text: $goalName)
+                .onChange(of: goalName) { _, newValue in
+                    viewModel.updateGoalName(newValue)
+                }
+                .focused($focusedField, equals: FocusedField.int)
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(.infinity)
             .overlay(
                 RoundedRectangle(cornerRadius: .infinity)
                     .stroke(viewModel.goalNameError == nil ? Color.clear : Color.red, lineWidth: 2)
@@ -116,11 +121,11 @@ struct GoalFormView: View {
 
             TextField(
                 "Wprowadź cenę",
-                text: Binding(
-                    get: { String(viewModel.goal.price) },
-                    set: { viewModel.updateGoalPrice($0) }
-                )
+                text: $goalPrice
             )
+                .onChange(of: goalPrice) { _, newValue in
+                    viewModel.updateGoalPrice(newValue)
+                }
             .keyboardType(.numberPad)
             .focused($focusedField, equals: FocusedField.int)
             .padding()
@@ -147,11 +152,11 @@ struct GoalFormView: View {
 
             TextField(
                 "Obecne oszczędności",
-                text: Binding(
-                    get: { String(viewModel.goal.saved) },
-                    set: { viewModel.updateCurrentSavings($0) }
-                )
+                text: $currentSavings
             )
+                .onChange(of: currentSavings) { _, newValue in
+                    viewModel.updateCurrentSavings(newValue)
+                }
             .keyboardType(.numberPad)
             .focused($focusedField, equals: FocusedField.int)
             .padding()
@@ -195,13 +200,16 @@ struct GoalFormView: View {
 
     private var actionButtonsView: some View {
         VStack(spacing: 16) {
-            Button(action: {
-                viewModel.isGoalCompleted = true
-            }) {
-                Text("Dalej").frame(maxWidth: .infinity)
-            }
+            NavigationLink(
+                String("Dalej"),
+                value: "goalConfirmation"
+            ).frame(maxWidth: .infinity)
             .buttonStyle(FilledButton())
-            .disabled(!viewModel.isGoalValid())
+            .disabled(!viewModel.isGoalValid(
+                name: goalName,
+                price: goalPrice,
+                savings: currentSavings
+            ))
 
             Button(action: {
                 router.path.removeLast()

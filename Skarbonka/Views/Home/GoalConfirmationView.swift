@@ -5,6 +5,7 @@ struct GoalConfirmation: View {
     
     @Environment(\.modelContext) private var context
     @EnvironmentObject private var style: StyleConfig
+    @EnvironmentObject private var router: Router
     
     var goalMessage: some View {
         let msg = [
@@ -54,7 +55,7 @@ struct GoalConfirmation: View {
                     }
 
                     Button(action: {
-                        print("Saving goal updated")
+                        router.path.removeLast()
                     }) {
                         Text("Anuluj")
                             .font(.headline)
