@@ -31,7 +31,7 @@ extension GoalSummaryViewModel {
     }
     
     func isCompleted() -> Bool {
-        getAmountToSave() == 0
+        getAmountToSave() <= 0
     }
     
     func removeGoal() {

@@ -36,8 +36,9 @@ extension GoalFormViewModel {
     
     func calculateDays(_ goal: GoalModel) -> Int {
         let remainingAmount = max(0, Double(goal.price - goal.saved))
-        let saveFrequency = max(1, Double(goal.savePerFrequency))
-        return Int(ceil(remainingAmount / saveFrequency))
+        let savePerFrequency = max(1, Double(goal.savePerFrequency))
+        let saveFrequency = goal.frequency == .daily ? 1 : goal.frequency == .weekly ? 7 : 30
+        return Int(ceil(remainingAmount / savePerFrequency) * Double(saveFrequency))
     }
     
     func isGoalValid(name: String, price: String, savings: String) -> Bool {
@@ -46,7 +47,8 @@ extension GoalFormViewModel {
         
         return validateGoalName(name) &&
                validateGoalPrice(intPrice) &&
-               validateCurrentSavings(intSavings)
+               validateCurrentSavings(intSavings) &&
+               validateSavingsNotExceedPrice(savings: intSavings, price: intPrice)
     }
 }
 
@@ -81,7 +83,7 @@ extension GoalFormViewModel {
 // MARK: - Validation Methods
 private extension GoalFormViewModel {
     func validateGoalName(_ value: String) -> Bool {
-        !value.isEmpty
+        !value.trimmingCharacters(in: .whitespaces).isEmpty
     }
     
     func validateGoalPrice(_ value: Int) -> Bool {
@@ -90,6 +92,10 @@ private extension GoalFormViewModel {
     
     func validateCurrentSavings(_ value: Int) -> Bool {
         value >= 0
+    }
+
+    func validateSavingsNotExceedPrice(savings: Int, price: Int) -> Bool {
+        savings <= price
     }
 }
 
