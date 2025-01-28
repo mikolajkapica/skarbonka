@@ -1,34 +1,12 @@
 import SwiftData
 import SwiftUI
 
-enum Tabs {
-    case home
-    case games
-    case profile
-    
-    var title: String {
-        switch self {
-        case .home: String(localized: "Oszczędzanie")
-        case .games: String(localized: "Gry")
-        case .profile: String(localized: "Profil")
-        }
-    }
-    
-    func icon(isSelected: Bool) -> String {
-        switch self {
-        case .home: isSelected ? "piggy-active" : "piggy"
-        case .games: isSelected ? "play-active" : "play"
-        case .profile: isSelected ? "profile-active" : "profile"
-        }
-    }
-}
-
 struct ContentView: View {
     @State private var selection: Tabs = .home
     @EnvironmentObject private var style: StyleConfig
     
     init() {
-        configureTabBarAppearance()
+        TabBarConfigurator.configure()
     }
     
     var body: some View {
@@ -57,13 +35,6 @@ struct ContentView: View {
             }
         }
         .tint(style.theme.primary)
-    }
-    
-    private func configureTabBarAppearance() {
-        let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .white
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
     }
 }
 
