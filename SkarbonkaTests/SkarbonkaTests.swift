@@ -6,7 +6,7 @@
 //
 
 import Testing
-@testable import skarbonka
+@testable import Skarbonka
 
 struct SkarbonkaTests {
 
