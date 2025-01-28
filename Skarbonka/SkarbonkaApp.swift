@@ -8,12 +8,13 @@ struct SkarbonkaApp: App {
     var body: some Scene {
         let style = StyleConfig()
         let fontDesign = style.typography.fontDesign
+        let container = DataController.createContainer(isPreview: isPreview)
+        let context = ModelContext(container)
+        let router = Router(modelContext: context)
         WindowGroup {
             ContentView()
-                .modelContainer(
-                    DataController.createContainer(isPreview: isPreview)
-                )
-                .environmentObject(Router())
+                .modelContext(context)
+                .environmentObject(router)
                 .environmentObject(style)
                 .fontDesign(fontDesign)
         }

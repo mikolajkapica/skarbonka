@@ -52,7 +52,9 @@ struct GoalEndView: View {
 }
 
 #Preview {
-    GoalEndView(goal: generateRandomGoal())
+    let container = DataController.previewContainer
+    return GoalEndView(goal: generateRandomGoal())
+        .modelContainer(container)
+        .environmentObject(Router(modelContext: container.mainContext))
         .environmentObject(StyleConfig())
-        .environmentObject(Router())
 }

@@ -4,8 +4,12 @@ import SwiftData
 
 class Router: ObservableObject {
     @Published var path: NavigationPath = NavigationPath()
-    @Environment(\.modelContext) var modelContext
+    private let modelContext: ModelContext
     private var viewModels: [Route: Any] = [:]
+    
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+    }
     
     func navigate(to route: Route) {
         if viewModels[route] == nil {
@@ -28,10 +32,8 @@ class Router: ObservableObject {
 
     private func createViewModel(for route: Route) -> Any? {
         switch route {
-        case .goalForm:
-            return GoalFormViewModel()
         case .goalConfirmation(let goal):
-            return GoalConfirmationViewModel(goal: goal)
+            return GoalConfirmationViewModel(goal: goal, modelContext: modelContext)
         default:
             return nil
         }

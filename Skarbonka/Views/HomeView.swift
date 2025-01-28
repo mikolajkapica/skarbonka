@@ -6,28 +6,62 @@ struct HomeView: View {
     @Environment(\.modelContext) private var modelContext: ModelContext
     @EnvironmentObject var router: Router
     @EnvironmentObject var style: StyleConfig
+    
+    // MARK: - Subviews
+    private var headerView: some View {
+        Text(String(localized: "Twoje cele oszczędnościowe"))
+            .font(style.typography.m)
+            .bold()
+            .foregroundColor(style.theme.foreground)
+    }
+    
+    private var addGoalButton: some View {
+        Button(action: {
+            router.navigate(to: .goalForm)
+        }) {
+            Text(String(localized: "Dodaj nowy cel"))
+                .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(FilledButton())
+        .bold()
+    }
+    
+    private var goalsList: some View {
+        ForEach(goals, id: \.id) { goal in
+            GoalSummaryWidget(
+                viewModel: GoalSummaryViewModel(
+                    goal: goal,
+                    modelContext: modelContext
+                )
+            )
+        }
+    }
+    
+    // MARK: - Navigation Content
+    @ViewBuilder
+    private func navigationContent(for route: Route) -> some View {
+        switch route {
+        case .goalForm:
+            GoalFormView()
+        case .goalConfirmation(let goal):
+            if let viewModel: GoalConfirmationViewModel = router.getViewModel(for: .goalConfirmation(goal: goal)) {
+                GoalConfirmationView(viewModel: viewModel)
+            }
+        case .goalEnd(let goal):
+            GoalEndView(goal: goal)
+        default:
+            EmptyView()
+        }
+    }
 
+    // MARK: - Body
     var body: some View {
         NavigationStack(path: $router.path) {
             ScrollView {
                 VStack(spacing: 20) {
-                    Text(String(localized: "Twoje cele oszczędnościowe"))
-                        .font(style.typography.m)
-                        .bold()
-                        .foregroundColor(style.theme.foreground)
-                    Button(action: {
-                        router.navigate(to: Route.goalForm)
-                    }) {
-                        Text(String(localized: "Dodaj nowy cel")).frame(
-                            maxWidth: .infinity)
-                    }
-                    .buttonStyle(FilledButton())
-                    .bold()
-                    ForEach(goals, id: \.id) { goal in
-                        GoalSummaryWidget(
-                            viewModel: GoalSummaryViewModel(
-                                goal: goal, modelContext: modelContext))
-                    }
+                    headerView
+                    addGoalButton
+                    goalsList
                 }
                 .padding(20)
             }
@@ -35,20 +69,7 @@ struct HomeView: View {
             .background(style.theme.backgroundGradient)
             .topBarTitle(String(localized: "Oszczędzanie"))
             .navigationDestination(for: Route.self) { route in
-                switch route {
-                case .goalForm:
-                    GoalFormView()
-                case .goalConfirmation(let goal):
-                    if let viewModel: GoalConfirmationViewModel =
-                        router.getViewModel(for: .goalConfirmation(goal: goal))
-                    {
-                        GoalConfirmationView(viewModel: viewModel)
-                    }
-                case .goalEnd(let goal):
-                    GoalEndView(goal: goal)
-                default:
-                    EmptyView()
-                }
+                navigationContent(for: route)
             }
         }
         .safeAreaInset(edge: VerticalEdge.bottom) {
@@ -57,11 +78,12 @@ struct HomeView: View {
     }
 }
 
+// MARK: - Preview
 #Preview {
     let container = DataController.previewContainer
-
+    
     HomeView()
         .modelContainer(container)
-        .environmentObject(Router())
+        .environmentObject(Router(modelContext: container.mainContext))
         .environmentObject(StyleConfig())
 }
