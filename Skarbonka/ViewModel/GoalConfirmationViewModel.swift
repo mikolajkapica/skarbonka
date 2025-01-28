@@ -2,38 +2,33 @@ import SwiftUI
 import SwiftData
 
 class GoalConfirmationViewModel: ObservableObject {
+    // MARK: - Published Properties
     @Published var navigateToDetail: Bool = false
-    var goal: GoalModel
-    var context: ModelContext
-
+    
+    // MARK: - Properties
+    let goal: GoalModel
+    private let context: ModelContext
+    
+    // MARK: - Initialization
     init(goal: GoalModel, modelContext: ModelContext) {
         self.goal = goal
         self.context = modelContext
     }
+}
 
+// MARK: - Public Methods
+extension GoalConfirmationViewModel {
     var futureDateMessage: String? {
-        var calculatedDays: Int {
-            let remainingAmount = max(0, Double(goal.price - goal.saved))
-            let saveFrequency = max(1, Double(goal.savePerFrequency))
-            return Int(ceil(remainingAmount / saveFrequency))
-        }
-        let dateFormat = "dd MMM"
-        let weekDays = 7
-        let today = Date()
-        if let futureDate = Calendar.current.date(byAdding: .day, value: calculatedDays, to: today) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = dateFormat
-            let formattedDate = dateFormatter.string(from: futureDate)
-            let weeks = calculatedDays / weekDays
-            if (weeks == 0) {
-                return "\(String(localized: "za")) \(calculatedDays) \(String(localized: "dni")) (\(formattedDate))"
-            } else {
-                return "\(String(localized: "już za")) \(weeks) \(String(localized: "tygodni")) (\(formattedDate))"
-            }
-        }
-        return nil
+        guard let futureDate = calculateFutureDate() else { return nil }
+        
+        let formattedDate = formatDate(futureDate)
+        let weeks = calculatedDays / 7
+        
+        return weeks == 0 
+            ? "\(String(localized: "za")) \(calculatedDays) \(String(localized: "dni")) (\(formattedDate))"
+            : "\(String(localized: "już za")) \(weeks) \(String(localized: "tygodni")) (\(formattedDate))"
     }
-
+    
     func saveGoal() {
         context.insert(goal)
         do {
@@ -42,4 +37,34 @@ class GoalConfirmationViewModel: ObservableObject {
             print("Error saving goal")
         }
     }
+}
+
+// MARK: - Private Methods
+private extension GoalConfirmationViewModel {
+    var calculatedDays: Int {
+        let remainingAmount = max(0, Double(goal.price - goal.saved))
+        let saveFrequency = max(1, Double(goal.savePerFrequency))
+        return Int(ceil(remainingAmount / saveFrequency))
+    }
+    
+    func calculateFutureDate() -> Date? {
+        Calendar.current.date(
+            byAdding: .day,
+            value: calculatedDays,
+            to: Date()
+        )
+    }
+    
+    func formatDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM"
+        return dateFormatter.string(from: date)
+    }
+}
+
+// MARK: - Preview Helpers
+#Preview {
+    let goal = generateRandomGoal()
+    let modelContext = ModelContext()
+    return GoalConfirmationViewModel(goal: goal, modelContext: modelContext)
 }
