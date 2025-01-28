@@ -84,6 +84,9 @@
     "Game Over!" : {
 
     },
+    "Gratulacje! Możesz teraz zacząć oszczędzać" : {
+
+    },
     "Gry" : {
 
     },
@@ -117,6 +120,9 @@
     "Naciśnij profil osoby, z którą chcesz zagrać albo dodaj nowego znajomego." : {
 
     },
+    "Naciśnij przycisk aby dodać nowy cel oszczędnościowy" : {
+
+    },
     "Nie masz jeszcze żadnych celów" : {
 
     },
@@ -144,6 +150,9 @@
     "Select Date" : {
 
     },
+    "Sprawdź czy wszystkie dane się zgadzają" : {
+
+    },
     "Start Game" : {
 
     },
@@ -169,6 +178,9 @@
 
     },
     "Wynik: %lld" : {
+
+    },
+    "Wypełnij wszystkie pola aby utworzyć nowy cel" : {
 
     },
     "za" : {

@@ -32,6 +32,7 @@ struct GoalFormView: View {
             }
             .padding(24)
         }
+        .lionMessage(String(localized: "Wypełnij wszystkie pola aby utworzyć nowy cel"))
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
         .toolbar { toolbarContent }

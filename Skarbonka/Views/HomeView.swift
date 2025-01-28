@@ -29,6 +29,7 @@ struct HomeView: View {
             .navigationDestination(for: Route.self) { route in
                 navigationContent(for: route)
             }
+            .lionMessage(String(localized: "Naciśnij przycisk aby dodać nowy cel oszczędnościowy"))
         }
         .safeAreaInset(edge: VerticalEdge.bottom) {
             LionHelper()

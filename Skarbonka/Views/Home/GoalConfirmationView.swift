@@ -26,6 +26,7 @@ struct GoalConfirmationView: View {
             }
             .padding(24)
         }
+        .lionMessage(String(localized: "Sprawdź czy wszystkie dane się zgadzają"))
         .background(style.theme.backgroundGradient)
         .navigationBarBackButtonHidden(true)
     }

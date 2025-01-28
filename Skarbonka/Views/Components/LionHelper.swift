@@ -16,7 +16,7 @@ class LionHelperViewModel: ObservableObject {
     
     // MARK: - Public Methods
     func updateMessage(_ newMessage: String) {
-        message = String(localized: newMessage)
+        message = newMessage
     }
 }
 

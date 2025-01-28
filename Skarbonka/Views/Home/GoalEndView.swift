@@ -26,6 +26,7 @@ struct GoalEndView: View {
             }
             .padding(24)
         }
+        .lionMessage(String(localized: "Gratulacje! Możesz teraz zacząć oszczędzać"))
         .background(style.theme.backgroundGradient)
         .navigationBarBackButtonHidden(true)
     }
