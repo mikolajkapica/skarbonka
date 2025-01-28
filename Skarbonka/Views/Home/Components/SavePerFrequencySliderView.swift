@@ -3,8 +3,8 @@ import Swift
 import SwiftUI
 
 struct SavingsView: View {
-    @ObservedObject var viewModel: SavePerFrequencyViewModel
-
+    let savePerFrequencyBinding: Binding<Double>
+    let calculatedDays: Int
     @EnvironmentObject var style: StyleConfig
 
     var body: some View {
@@ -14,7 +14,7 @@ struct SavingsView: View {
                 .foregroundStyle(.white)
 
             Slider(
-                value: viewModel.savePerFrequencyBinding,
+                value: savePerFrequencyBinding,
                 in: 1...50,
                 step: 1
             )
@@ -22,7 +22,7 @@ struct SavingsView: View {
 
             TextField(
                 String(localized: "Kwota"),
-                value: $viewModel.goal.savePerFrequency,
+                value: savePerFrequencyBinding,
                 formatter: NumberFormatter.currency
             )
             .keyboardType(.numberPad)
@@ -33,7 +33,7 @@ struct SavingsView: View {
             .bold()
 
             Text(
-                "\(String(localized: "Kupisz za")) \(viewModel.calculatedDays) \(String(localized: "dni"))"
+                "\(String(localized: "Kupisz za")) \(calculatedDays) \(String(localized: "dni"))"
             )
             .font(.subheadline)
             .foregroundStyle(.white)
@@ -43,6 +43,7 @@ struct SavingsView: View {
 
 #Preview {
     SavingsView(
-        viewModel: SavePerFrequencyViewModel(goal: generateRandomGoal())
+        savePerFrequencyBinding: .constant(10),
+        calculatedDays: 10
     ).environmentObject(StyleConfig())
 }

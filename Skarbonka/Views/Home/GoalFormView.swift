@@ -20,7 +20,10 @@ struct GoalFormView: View {
                 iconSelectionView
                 priceAndSavingsView
                 optionSelectionView
-                SavingsView(viewModel: SavePerFrequencyViewModel(goal: viewModel.goal))
+                SavingsView(
+                    savePerFrequencyBinding: viewModel.savePerFrequencyBinding,
+                    calculatedDays: viewModel.calculateDays(viewModel.goal)
+                )
                 startSavingDateView
                 actionButtonsView
             }
@@ -28,16 +31,6 @@ struct GoalFormView: View {
         }
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
-        .navigationDestination(for: Route.self) { route in
-            switch route {
-            case .GoalConfirmation(let goal):
-                GoalConfirmation(
-                    viewModel: GoalConfirmationViewModel(
-                        context: modelContext, goal: goal))
-            default:
-                EmptyView()
-            }
-        }
         .toolbar {
             ToolbarItem(placement: .keyboard) {
                 Spacer()
@@ -67,10 +60,12 @@ struct GoalFormView: View {
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(.infinity)
-            .overlay(
-                RoundedRectangle(cornerRadius: .infinity)
-                    .stroke(viewModel.goalNameError == nil ? Color.clear : Color.red, lineWidth: 2)
-            )
+                .overlay(
+                    RoundedRectangle(cornerRadius: .infinity)
+                        .stroke(
+                            viewModel.goalNameError == nil
+                                ? Color.clear : Color.red, lineWidth: 2)
+                )
 
             if let error = viewModel.goalNameError {
                 Text(error)
@@ -128,9 +123,9 @@ struct GoalFormView: View {
                 "Wprowadź cenę",
                 text: $goalPrice
             )
-                .onChange(of: goalPrice) { _, newValue in
-                    viewModel.updateGoalPrice(newValue)
-                }
+            .onChange(of: goalPrice) { _, newValue in
+                viewModel.updateGoalPrice(newValue)
+            }
             .keyboardType(.numberPad)
             .focused($focusedField, equals: FocusedField.int)
             .padding()
@@ -138,7 +133,9 @@ struct GoalFormView: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(viewModel.goalPriceError == nil ? Color.clear : Color.red, lineWidth: 2)
+                    .stroke(
+                        viewModel.goalPriceError == nil
+                            ? Color.clear : Color.red, lineWidth: 2)
             )
 
             if let error = viewModel.goalPriceError {
@@ -159,9 +156,9 @@ struct GoalFormView: View {
                 "Obecne oszczędności",
                 text: $currentSavings
             )
-                .onChange(of: currentSavings) { _, newValue in
-                    viewModel.updateCurrentSavings(newValue)
-                }
+            .onChange(of: currentSavings) { _, newValue in
+                viewModel.updateCurrentSavings(newValue)
+            }
             .keyboardType(.numberPad)
             .focused($focusedField, equals: FocusedField.int)
             .padding()
@@ -169,7 +166,9 @@ struct GoalFormView: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(viewModel.currentSavingsError == nil ? Color.clear : Color.red, lineWidth: 2)
+                    .stroke(
+                        viewModel.currentSavingsError == nil
+                            ? Color.clear : Color.red, lineWidth: 2)
             )
 
             if let error = viewModel.currentSavingsError {
@@ -207,18 +206,20 @@ struct GoalFormView: View {
         VStack(spacing: 16) {
             Button(
                 action: {
-                    router.navigateTo(to: Route.GoalConfirmation(goal: viewModel.goal))
+                    router.navigate(
+                        to: Route.goalConfirmation(goal: viewModel.goal))
                 }
             ) {
                 Text("Dalej").frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
             .buttonStyle(FilledButton())
-            .disabled(!viewModel.isGoalValid(
-                name: goalName,
-                price: goalPrice,
-                savings: currentSavings
-            ))
+            .disabled(
+                !viewModel.isGoalValid(
+                    name: goalName,
+                    price: goalPrice,
+                    savings: currentSavings
+                ))
 
             Button(action: {
                 router.path.removeLast()

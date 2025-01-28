@@ -1,21 +1,19 @@
 import SwiftData
 import SwiftUI
 
+
+let isPreview: Bool = true
+
 @main
 struct SkarbonkaApp: App {
-    @Environment(\.modelContext) private var context
-    @StateObject private var router = Router()
-    @StateObject private var style = StyleConfig()
-    
-    
-    let container = DataController.previewContainer
-
     var body: some Scene {
+        let router: Router = Router()
+        let style = StyleConfig()
+        let fontDesign = style.typography.fontDesign
         WindowGroup {
             ContentView()
-//                .modelContainer(for: GoalModel.self)
-                .modelContainer(container)
-                .fontDesign(style.typography.fontDesign)
+                .modelContainer(DataController.createContainer(isPreview: isPreview))
+                .fontDesign(fontDesign)
                 .environmentObject(router)
                 .environmentObject(style)
         }

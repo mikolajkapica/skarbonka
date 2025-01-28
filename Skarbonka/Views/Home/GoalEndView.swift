@@ -1,6 +1,7 @@
 import SwiftUI
+import SwiftData
 
-struct GoalEnd: View {
+struct GoalEndView: View {
     let goal: GoalModel
     @EnvironmentObject private var style: StyleConfig
     @EnvironmentObject private var router: Router
@@ -31,7 +32,7 @@ struct GoalEnd: View {
                 
                 VStack(spacing: 16) {
                     Button(action: {
-                        router.removeAll()
+                        router.goHome()
                     }) {
                         Text("Wróć")
                             .font(.headline)
@@ -51,7 +52,7 @@ struct GoalEnd: View {
 }
 
 #Preview {
-    GoalEnd(goal: generateRandomGoal())
+    GoalEndView(goal: generateRandomGoal())
         .environmentObject(StyleConfig())
         .environmentObject(Router())
 }

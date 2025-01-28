@@ -38,7 +38,6 @@ class GoalConfirmationViewModel: ObservableObject {
         context.insert(goal)
         do {
             try context.save()
-            navigateToDetail = true
         } catch {
             print("Error saving goal")
         }

@@ -7,7 +7,7 @@ struct TopBar: View {
 
     var body: some View {
         HStack {
-            if viewModel.isBack {
+            if !router.path.isEmpty {
                 Button(action: {
                     router.path.removeLast()
                 }) {

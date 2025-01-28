@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct GoalConfirmation: View {
+struct GoalConfirmationView: View {
     @StateObject var viewModel: GoalConfirmationViewModel
     
     @Environment(\.modelContext) private var context
@@ -44,7 +44,10 @@ struct GoalConfirmation: View {
                 .padding(.vertical)
 
                 VStack(spacing: 16) {
-                    Button(action: viewModel.saveGoal) {
+                    Button(action: {
+                        viewModel.saveGoal()
+                        router.goHome()
+                    }) {
                         Text("Zapisz cel")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -70,9 +73,6 @@ struct GoalConfirmation: View {
             .padding(24)
         }
         .background(style.theme.backgroundGradient)
-        .navigationDestination(isPresented: $viewModel.navigateToDetail) {
-            GoalEnd(goal: viewModel.goal)
-        }
         .navigationBarBackButtonHidden(true)
     }
 }
