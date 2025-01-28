@@ -29,8 +29,7 @@ struct GoalFormView: View {
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
         .navigationDestination(isPresented: $viewModel.isGoalCompleted) {
-            router.path.append(viewModel.goal)
-            return GoalConfirmation(
+            GoalConfirmation(
                 viewModel: GoalConfirmationViewModel(
                     context: modelContext, goal: viewModel.goal))
         }
