@@ -5,14 +5,17 @@ struct GoalFormView: View {
     @EnvironmentObject private var style: StyleConfig
     @EnvironmentObject private var router: Router
     @Environment(\.modelContext) private var modelContext
-
+    
+    // MARK: - Form State
     @State private var goalName: String = ""
     @State private var goalPrice: String = ""
     @State private var currentSavings: String = ""
-
+    
+    // MARK: - Focus State
     enum FocusedField { case int, dec }
     @FocusState private var focusedField: FocusedField?
-
+    
+    // MARK: - Body
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
@@ -31,203 +34,143 @@ struct GoalFormView: View {
         }
         .navigationBarBackButtonHidden(true)
         .background(style.theme.backgroundGradient)
-        .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                Spacer()
-            }
-            ToolbarItem(placement: .keyboard) {
-                Button {
-                    focusedField = nil
-                } label: {
-                    Image(systemName: "keyboard.chevron.compact.down")
-                }
-            }
-        }
+        .toolbar { toolbarContent }
         .topBarTitle("Oszczędności")
     }
+}
 
-    private var goalNameFieldView: some View {
-        VStack(alignment: .leading) {
-            Text("Wpisz nazwę Twojego celu")
-                .foregroundColor(.white)
-                .font(.headline)
-
-            TextField("np. karty PokemonGo", text: $goalName)
-                .onChange(of: goalName) { _, newValue in
-                    viewModel.updateGoalName(newValue)
-                }
-                .focused($focusedField, equals: FocusedField.int)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(.infinity)
-                .overlay(
-                    RoundedRectangle(cornerRadius: .infinity)
-                        .stroke(
-                            viewModel.goalNameError == nil
-                                ? Color.clear : Color.red, lineWidth: 2)
-                )
-
-            if let error = viewModel.goalNameError {
-                Text(error)
-                    .foregroundColor(.red)
-                    .font(.caption)
+// MARK: - Toolbar Content
+private extension GoalFormView {
+    @ToolbarContentBuilder
+    var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .keyboard) {
+            Spacer()
+        }
+        ToolbarItem(placement: .keyboard) {
+            Button {
+                focusedField = nil
+            } label: {
+                Image(systemName: "keyboard.chevron.compact.down")
             }
         }
     }
+}
 
-    private var iconSelectionView: some View {
-        VStack(alignment: .leading) {
-            Text("Wybierz grafikę")
-                .font(.headline)
-                .foregroundColor(.white)
-
-            LazyVGrid(
-                columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible()),
-                    GridItem(.flexible()),
-                ], spacing: 16
-            ) {
-                ForEach(viewModel.icons, id: \.self) { icon in
-                    Button(action: { viewModel.goal.icon = icon }) {
-                        Image(systemName: icon)
-                            .foregroundColor(
-                                viewModel.goal.icon == icon
-                                    ? style.theme.primary
-                                    : style.theme.background
-                            )
-                            .font(.system(size: 40))
-                            .frame(width: 100, height: 100)
-                            .background(style.theme.foreground)
-                            .clipShape(Circle())
-                    }
-                }
-            }
+// MARK: - Form Components
+private extension GoalFormView {
+    var goalNameFieldView: some View {
+        FormField(
+            title: "Wpisz nazwę Twojego celu",
+            placeholder: "np. karty PokemonGo",
+            text: $goalName,
+            error: viewModel.goalNameError
+        ) {
+            viewModel.updateGoalName($0)
         }
+        .focused($focusedField, equals: .int)
     }
-
-    private var priceAndSavingsView: some View {
+    
+    var iconSelectionView: some View {
+        IconSelectionGrid(
+            selectedIcon: $viewModel.goal.icon,
+            icons: viewModel.icons,
+            style: style
+        )
+    }
+    
+    var priceAndSavingsView: some View {
         VStack(spacing: 20) {
             priceFieldView
             currentSavingsFieldView
         }
     }
-
-    private var priceFieldView: some View {
-        VStack(alignment: .leading) {
-            Text("Cena produktu")
-                .bold()
-                .foregroundStyle(.white)
-
-            TextField(
-                "Wprowadź cenę",
-                text: $goalPrice
-            )
-            .onChange(of: goalPrice) { _, newValue in
-                viewModel.updateGoalPrice(newValue)
-            }
-            .keyboardType(.numberPad)
-            .focused($focusedField, equals: FocusedField.int)
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(
-                        viewModel.goalPriceError == nil
-                            ? Color.clear : Color.red, lineWidth: 2)
-            )
-
-            if let error = viewModel.goalPriceError {
-                Text(error)
-                    .foregroundColor(.red)
-                    .font(.caption)
-            }
+    
+    var priceFieldView: some View {
+        FormField(
+            title: "Cena produktu",
+            placeholder: "Wprowadź cenę",
+            text: $goalPrice,
+            error: viewModel.goalPriceError,
+            keyboardType: .numberPad
+        ) {
+            viewModel.updateGoalPrice($0)
         }
+        .focused($focusedField, equals: .int)
     }
-
-    private var currentSavingsFieldView: some View {
-        VStack(alignment: .leading) {
-            Text("Teraz w skarbonce masz:")
-                .bold()
-                .foregroundStyle(.white)
-
-            TextField(
-                "Obecne oszczędności",
-                text: $currentSavings
-            )
-            .onChange(of: currentSavings) { _, newValue in
-                viewModel.updateCurrentSavings(newValue)
-            }
-            .keyboardType(.numberPad)
-            .focused($focusedField, equals: FocusedField.int)
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(8)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(
-                        viewModel.currentSavingsError == nil
-                            ? Color.clear : Color.red, lineWidth: 2)
-            )
-
-            if let error = viewModel.currentSavingsError {
-                Text(error)
-                    .foregroundColor(.red)
-                    .font(.caption)
-            }
+    
+    var currentSavingsFieldView: some View {
+        FormField(
+            title: "Teraz w skarbonce masz:",
+            placeholder: "Obecne oszczędności",
+            text: $currentSavings,
+            error: viewModel.currentSavingsError,
+            keyboardType: .numberPad
+        ) {
+            viewModel.updateCurrentSavings($0)
         }
+        .focused($focusedField, equals: .int)
     }
-
-    private var optionSelectionView: some View {
+    
+    var optionSelectionView: some View {
         VStack(alignment: .leading) {
-            Text("Jak często będziesz oszczędzal?")
+            Text(String(localized: "Jak często będziesz oszczędzal?"))
                 .font(.headline)
                 .foregroundColor(.white)
-
+            
             RadioButtonPickerView(
-                options: ["Codziennie", "Co tydzień", "Co miesiąc"],
+                options: [
+                    String(localized: "Codziennie"),
+                    String(localized: "Co tydzień"),
+                    String(localized: "Co miesiąc")
+                ],
                 selectedOption: $viewModel.selectedOption
             )
         }
     }
-
-    private var startSavingDateView: some View {
+    
+    var startSavingDateView: some View {
         VStack(alignment: .leading) {
-            Text("Kiedy zaczniesz oszczędzać?")
+            Text(String(localized: "Kiedy zaczniesz oszczędzać?"))
                 .font(.headline)
                 .foregroundStyle(.white)
-
+            
             CalendarView()
         }
     }
-
-    private var actionButtonsView: some View {
+    
+    var actionButtonsView: some View {
         VStack(spacing: 16) {
-            Button(
-                action: {
-                    router.navigate(
-                        to: Route.goalConfirmation(goal: viewModel.goal))
-                }
-            ) {
-                Text("Dalej").frame(maxWidth: .infinity)
+            Button(action: navigateToConfirmation) {
+                Text(String(localized: "Dalej")).frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
             .buttonStyle(FilledButton())
-            .disabled(
-                !viewModel.isGoalValid(
-                    name: goalName,
-                    price: goalPrice,
-                    savings: currentSavings
-                ))
-
-            Button(action: {
-                router.path.removeLast()
-            }) {
-                Text("Anuluj").frame(maxWidth: .infinity)
+            .disabled(!isFormValid)
+            
+            Button(action: dismissForm) {
+                Text(String(localized: "Anuluj")).frame(maxWidth: .infinity)
             }
             .buttonStyle(MutedButton())
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+// MARK: - Actions
+private extension GoalFormView {
+    var isFormValid: Bool {
+        viewModel.isGoalValid(
+            name: goalName,
+            price: goalPrice,
+            savings: currentSavings
+        )
+    }
+    
+    func navigateToConfirmation() {
+        router.navigate(to: Route.goalConfirmation(goal: viewModel.goal))
+    }
+    
+    func dismissForm() {
+        router.path.removeLast()
     }
 }

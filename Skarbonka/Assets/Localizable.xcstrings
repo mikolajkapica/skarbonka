@@ -57,7 +57,13 @@
     "Brawo! Udao sie zebrac!" : {
 
     },
-    "Cena produktu" : {
+    "Co miesiąc" : {
+
+    },
+    "Co tydzień" : {
+
+    },
+    "Codziennie" : {
 
     },
     "Dalej" : {
@@ -114,12 +120,6 @@
     "Nie udalo sie obliczyc daty" : {
 
     },
-    "np. karty PokemonGo" : {
-
-    },
-    "Obecne oszczędności" : {
-
-    },
     "Odłóż dziś" : {
 
     },
@@ -141,9 +141,6 @@
     "Start Game" : {
 
     },
-    "Teraz w skarbonce masz:" : {
-
-    },
     "Twój cel zotał dodany" : {
 
     },
@@ -157,12 +154,6 @@
 
     },
     "Usuń cel" : {
-
-    },
-    "Wpisz nazwę Twojego celu" : {
-
-    },
-    "Wprowadź cenę" : {
 
     },
     "Wróć" : {
