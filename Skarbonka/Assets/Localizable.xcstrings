@@ -164,28 +164,6 @@
         }
       }
     },
-    "Final Score: %lld" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Final score: %lld"
-          }
-        }
-      }
-    },
-    "Game Over!" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Game over!"
-          }
-        }
-      }
-    },
     "Gratulacje! Możesz teraz zacząć oszczędzać" : {
       "localizations" : {
         "en" : {
@@ -416,17 +394,6 @@
         }
       }
     },
-    "Play Again" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Play Again"
-          }
-        }
-      }
-    },
     "Profil" : {
       "localizations" : {
         "en" : {
@@ -453,17 +420,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Check if all data is correct"
-          }
-        }
-      }
-    },
-    "Start Game" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Game"
           }
         }
       }
