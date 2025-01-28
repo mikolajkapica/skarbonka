@@ -5,18 +5,25 @@ let isPreview: Bool = false
 
 @main
 struct SkarbonkaApp: App {
+    private let style: StyleConfig
+    private let container: ModelContainer
+    private let context: ModelContext
+    private let router: Router
+    
+    init() {
+        style = StyleConfig()
+        container = DataController.createContainer(isPreview: isPreview)
+        context = ModelContext(container)
+        router = Router(modelContext: context)
+    }
+    
     var body: some Scene {
-        let style = StyleConfig()
-        let fontDesign = style.typography.fontDesign
-        let container = DataController.createContainer(isPreview: isPreview)
-        let context = ModelContext(container)
-        let router = Router(modelContext: context)
         WindowGroup {
             ContentView()
                 .modelContext(context)
                 .environmentObject(router)
                 .environmentObject(style)
-                .fontDesign(fontDesign)
+                .fontDesign(style.typography.fontDesign)
         }
     }
 }
