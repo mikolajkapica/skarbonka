@@ -75,13 +75,13 @@
     "Final Score: %lld" : {
 
     },
-    "fsdg" : {
-
-    },
     "Game Over!" : {
 
     },
     "Gry" : {
+
+    },
+    "Jak często będziesz oszczędzal?" : {
 
     },
     "Jaką kwotę będziesz oszczędzać?" : {
@@ -123,9 +123,6 @@
     "Odłóż dziś" : {
 
     },
-    "OK" : {
-
-    },
     "Oszczędzanie" : {
 
     },
@@ -162,10 +159,10 @@
     "Usuń cel" : {
 
     },
-    "Validation Error" : {
+    "Wpisz nazwę Twojego celu" : {
 
     },
-    "Wpisz nazwę Twojego celu" : {
+    "Wprowadź cenę" : {
 
     },
     "Wróć" : {

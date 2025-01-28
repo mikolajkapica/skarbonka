@@ -9,10 +9,6 @@ struct GoalFormView: View {
     enum FocusedField { case int, dec }
     @FocusState private var focusedField: FocusedField?
 
-    // Alert state
-    @State private var showAlert = false
-    @State private var alertMessage = ""
-
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
@@ -54,11 +50,23 @@ struct GoalFormView: View {
                 .foregroundColor(.white)
                 .font(.headline)
 
-            TextField("np. karty PokemonGo", text: $viewModel.goal.name)
-                .focused($focusedField, equals: FocusedField.int)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(.infinity)
+            TextField("np. karty PokemonGo", text: $viewModel.goal.name, onEditingChanged: { _ in
+                viewModel.validateGoalName()
+            })
+            .focused($focusedField, equals: FocusedField.int)
+            .padding()
+            .background(Color(.systemGray6))
+            .cornerRadius(.infinity)
+            .overlay(
+                RoundedRectangle(cornerRadius: .infinity)
+                    .stroke(viewModel.goalNameError == nil ? Color.clear : Color.red, lineWidth: 2)
+            )
+
+            if let error = viewModel.goalNameError {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.caption)
+            }
         }
     }
 
@@ -102,14 +110,15 @@ struct GoalFormView: View {
 
     private var priceFieldView: some View {
         VStack(alignment: .leading) {
-            Text(String(localized: "Cena produktu"))
+            Text("Cena produktu")
                 .bold()
                 .foregroundStyle(.white)
+
             TextField(
-                "fsdg",
+                "Wprowadź cenę",
                 text: Binding(
                     get: { String(viewModel.goal.price) },
-                    set: { newValue in viewModel.updateGoalPrice(newValue) }
+                    set: { viewModel.updateGoalPrice($0) }
                 )
             )
             .keyboardType(.numberPad)
@@ -117,6 +126,16 @@ struct GoalFormView: View {
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(viewModel.goalPriceError == nil ? Color.clear : Color.red, lineWidth: 2)
+            )
+
+            if let error = viewModel.goalPriceError {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.caption)
+            }
         }
     }
 
@@ -125,12 +144,12 @@ struct GoalFormView: View {
             Text("Teraz w skarbonce masz:")
                 .bold()
                 .foregroundStyle(.white)
+
             TextField(
                 "Obecne oszczędności",
                 text: Binding(
                     get: { String(viewModel.goal.saved) },
-                    set: { newValue in viewModel.updateCurrentSavings(newValue)
-                    }
+                    set: { viewModel.updateCurrentSavings($0) }
                 )
             )
             .keyboardType(.numberPad)
@@ -138,12 +157,22 @@ struct GoalFormView: View {
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(viewModel.currentSavingsError == nil ? Color.clear : Color.red, lineWidth: 2)
+            )
+
+            if let error = viewModel.currentSavingsError {
+                Text(error)
+                    .foregroundColor(.red)
+                    .font(.caption)
+            }
         }
     }
 
     private var optionSelectionView: some View {
         VStack(alignment: .leading) {
-            Text(String("Jak często będziesz oszczędzal?"))
+            Text("Jak często będziesz oszczędzal?")
                 .font(.headline)
                 .foregroundColor(.white)
 
@@ -167,17 +196,12 @@ struct GoalFormView: View {
     private var actionButtonsView: some View {
         VStack(spacing: 16) {
             Button(action: {
-                if viewModel.isGoalValid() {
-                    viewModel.isGoalCompleted = true
-                } else {
-                    alertMessage = "Please fill in all required fields"
-                    showAlert = true
-                }
+                viewModel.isGoalCompleted = true
             }) {
                 Text("Dalej").frame(maxWidth: .infinity)
             }
             .buttonStyle(FilledButton())
-            .disabled(!viewModel.isGoalValid()) // Disable button if validation fails
+            .disabled(!viewModel.isGoalValid())
 
             Button(action: {
                 router.path.removeLast()
@@ -187,15 +211,5 @@ struct GoalFormView: View {
             .buttonStyle(MutedButton())
             .frame(maxWidth: .infinity)
         }
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Validation Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
-        }
     }
-}
-
-#Preview {
-    let viewModel = GoalFormViewModel()
-    GoalFormView(viewModel: viewModel)
-        .environmentObject(StyleConfig())
-        .environmentObject(Router())
 }
