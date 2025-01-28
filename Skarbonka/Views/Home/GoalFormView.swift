@@ -123,7 +123,7 @@ private extension GoalFormView {
             
             VStack {
                 RadioButtonPicker(
-                    selectedOption: $viewModel.selectedOption,
+                    selectedOption: viewModel.frequencyBinding,
                     options: [
                         String(localized: "Codziennie"),
                         String(localized: "Co tydzień"),

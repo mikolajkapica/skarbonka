@@ -34,6 +34,26 @@ extension GoalFormViewModel {
         )
     }
     
+    var frequencyBinding: Binding<String> {
+        Binding(
+            get: { 
+                switch self.goal.frequency {
+                case .daily: return "Codziennie"
+                case .weekly: return "Co tydzień"
+                case .monthly: return "Co miesiąc"
+                }
+            },
+            set: { newValue in
+                switch newValue {
+                case "Codziennie": self.goal.frequency = .daily
+                case "Co tydzień": self.goal.frequency = .weekly
+                case "Co miesiąc": self.goal.frequency = .monthly
+                default: break
+                }
+            }
+        )
+    }
+    
     func calculateDays(_ goal: GoalModel) -> Int {
         let remainingAmount = max(0, Double(goal.price - goal.saved))
         let savePerFrequency = max(1, Double(goal.savePerFrequency))
