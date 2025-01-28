@@ -1,18 +1,48 @@
 import SwiftUI
 
 struct GoalConfirmationView: View {
+    // MARK: - Properties
     @StateObject var viewModel: GoalConfirmationViewModel
-    
     @Environment(\.modelContext) private var context
     @EnvironmentObject private var style: StyleConfig
     @EnvironmentObject private var router: Router
-    
+
+    // MARK: - Body
+    var body: some View {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack {
+                    goalMessage
+                    iconView
+                    dateMessage
+                }
+                .foregroundStyle(.white)
+                .font(style.typography.m)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical)
+
+                actionButtons
+            }
+            .padding(24)
+        }
+        .background(style.theme.backgroundGradient)
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+// MARK: - Components
+private extension GoalConfirmationView {
     var goalMessage: some View {
         let msg = [
-            "Oszczędzaj ",
-            String(viewModel.goal.savePerFrequency) + "zł",
-            " tygodniowo i ciesz się z zakupu \(viewModel.goal.name) za \(viewModel.goal.price) \(String(localized: "zl"))",
+            String(localized: "Oszczędzaj "),
+            "\(viewModel.goal.savePerFrequency)zł",
+            String(
+                localized:
+                    " tygodniowo i ciesz się z zakupu \(viewModel.goal.name) za \(viewModel.goal.price) zl"
+            ),
         ]
+
         return
             (Text(msg[0])
             + Text(msg[1]).foregroundStyle(style.theme.primary)
@@ -29,50 +59,65 @@ struct GoalConfirmationView: View {
             .clipShape(Circle())
     }
 
-    var body: some View {
-        VStack(spacing: 0) {
-            ScrollView {
-                VStack {
-                    goalMessage
-                    iconView
-                    Text(viewModel.futureDateMessage ?? String(localized: "Nie udalo sie obliczyc daty"))
-                }
-                .foregroundStyle(.white)
-                .font(style.typography.m)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical)
-
-                VStack(spacing: 16) {
-                    Button(action: {
-                        viewModel.saveGoal()
-                        router.goHome()
-                    }) {
-                        Text("Zapisz cel")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(style.theme.primary)
-                            .cornerRadius(.infinity)
-                    }
-
-                    Button(action: {
-                        router.path.removeLast()
-                    }) {
-                        Text("Anuluj")
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(style.theme.foreground)
-                            .cornerRadius(.infinity)
-                    }
-                }
-            }
-            .padding(24)
-        }
-        .background(style.theme.backgroundGradient)
-        .navigationBarBackButtonHidden(true)
+    var dateMessage: some View {
+        Text(
+            viewModel.futureDateMessage
+                ?? String(localized: "Nie udalo sie obliczyc daty"))
     }
+
+    var actionButtons: some View {
+        VStack(spacing: 16) {
+            saveButton
+            cancelButton
+        }
+    }
+
+    var saveButton: some View {
+        Button(action: saveGoal) {
+            Text(String(localized: "Zapisz cel"))
+                .font(.headline)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(style.theme.primary)
+                .cornerRadius(.infinity)
+        }
+    }
+
+    var cancelButton: some View {
+        Button(action: dismissView) {
+            Text(String(localized: "Anuluj"))
+                .font(.headline)
+                .foregroundColor(.black)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(style.theme.foreground)
+                .cornerRadius(.infinity)
+        }
+    }
+}
+
+// MARK: - Actions
+private extension GoalConfirmationView {
+    func saveGoal() {
+        viewModel.saveGoal()
+        router.goHome()
+    }
+
+    func dismissView() {
+        router.path.removeLast()
+    }
+}
+
+// MARK: - Preview
+#Preview {
+    let container = DataController.previewContainer
+    let goal = generateRandomGoal()
+    GoalConfirmationView(
+        viewModel: GoalConfirmationViewModel(
+            goal: goal, modelContext: container.mainContext)
+    )
+    .modelContainer(container)
+    .environmentObject(Router(modelContext: container.mainContext))
+    .environmentObject(StyleConfig())
 }

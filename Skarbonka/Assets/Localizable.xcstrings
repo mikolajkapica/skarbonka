@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "pl",
   "strings" : {
+    " tygodniowo i ciesz się z zakupu %@ za %lld zl" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : " tygodniowo i ciesz się z zakupu %1$@ za %2$lld zl"
+          }
+        }
+      }
+    },
     "%@ %lld %@" : {
       "localizations" : {
         "pl" : {
@@ -121,6 +131,9 @@
 
     },
     "Odłóż dziś" : {
+
+    },
+    "Oszczędzaj " : {
 
     },
     "Oszczędzanie" : {
