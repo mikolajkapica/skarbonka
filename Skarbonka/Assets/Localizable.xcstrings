@@ -11,16 +11,6 @@
         }
       }
     },
-    "%@ %lld %@" : {
-      "localizations" : {
-        "pl" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ %2$lld %3$@"
-          }
-        }
-      }
-    },
     "%@ %lld %@ %@" : {
       "localizations" : {
         "pl" : {

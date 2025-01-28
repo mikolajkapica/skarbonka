@@ -24,7 +24,7 @@ struct GoalFormView: View {
                 priceAndSavingsView
                 optionSelectionView
                 SavingsView(
-                    savePerFrequencyBinding: viewModel.savePerFrequencyBinding,
+                    savePerFrequency: viewModel.savePerFrequencyBinding,
                     calculatedDays: viewModel.calculateDays(viewModel.goal)
                 )
                 startSavingDateView
@@ -117,13 +117,13 @@ private extension GoalFormView {
                 .font(.headline)
                 .foregroundColor(.white)
             
-            RadioButtonPickerView(
+            RadioButtonPicker(
+                selectedOption: $viewModel.selectedOption,
                 options: [
                     String(localized: "Codziennie"),
                     String(localized: "Co tydzień"),
                     String(localized: "Co miesiąc")
-                ],
-                selectedOption: $viewModel.selectedOption
+                ]
             )
         }
     }
@@ -134,7 +134,7 @@ private extension GoalFormView {
                 .font(.headline)
                 .foregroundStyle(.white)
             
-            CalendarView()
+            DatePickerCard()
         }
     }
     

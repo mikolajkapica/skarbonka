@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Calendar: View {
+struct DatePickerCard: View {
     // MARK: - Properties
     @State private var selectedDate: Date = Date()
     @EnvironmentObject private var style: StyleConfig
@@ -20,7 +20,7 @@ struct Calendar: View {
 }
 
 // MARK: - Components
-private extension Calendar {
+private extension DatePickerCard {
     var backgroundShape: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color.white)
@@ -30,6 +30,6 @@ private extension Calendar {
 
 // MARK: - Preview
 #Preview {
-    Calendar()
+    DatePickerCard()
         .environmentObject(StyleConfig())
 } 
