@@ -1,3 +1,4 @@
+// MARK: - Navigation Routes
 enum Route: Hashable {
     case home
     case goalForm

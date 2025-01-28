@@ -1,25 +1,41 @@
-import SwiftUI
+import Foundation
 
+// MARK: - Random Goal Generation
+struct RandomGoalGenerator {
+    // MARK: - Constants
+    private static let names = [
+        "Buy a New Laptop",
+        "Save for Vacation",
+        "Emergency Fund",
+        "Buy a New Phone",
+        "Retirement Savings"
+    ]
+    
+    private static let icons = [
+        "laptopcomputer",
+        "airplane",
+        "briefcase",
+        "phone",
+        "banknote"
+    ]
+    
+    private static let frequencies: [Frequency] = [.daily, .weekly, .monthly]
+    
+    // MARK: - Generation
+    static func generate() -> GoalModel {
+        GoalModel(
+            name: names.randomElement()!,
+            icon: icons.randomElement()!,
+            price: Int.random(in: 20...300),
+            frequency: frequencies.randomElement()!,
+            savePerFrequency: Int.random(in: 1...50),
+            start: Date(),
+            saved: Int.random(in: 0...300)
+        )
+    }
+}
+
+// MARK: - Global Helper
 func generateRandomGoal() -> GoalModel {
-    let names = ["Buy a New Laptop", "Save for Vacation", "Emergency Fund", "Buy a New Phone", "Retirement Savings"]
-    let icons = ["laptopcomputer", "airplane", "briefcase", "phone", "banknote"]
-    let frequencies: [Frequency] = [.daily, .weekly, .monthly]
-    
-    let randomName = names.randomElement()!
-    let randomIcon = icons.randomElement()!
-    let randomPrice = Int.random(in: 20...300)
-    let randomFrequency = frequencies.randomElement()!
-    let randomSavePerFrequency = Int.random(in: 1...50)
-    let randomStartDate = Date()
-    let randomSaved = Int.random(in: 0...randomPrice)
-    
-    return GoalModel(
-        name: randomName,
-        icon: randomIcon,
-        price: randomPrice,
-        frequency: randomFrequency,
-        savePerFrequency: randomSavePerFrequency,
-        start: randomStartDate,
-        saved: randomSaved
-    )
+    RandomGoalGenerator.generate()
 }
