@@ -65,6 +65,7 @@ private extension GoalConfirmationViewModel {
 // MARK: - Preview Helpers
 #if DEBUG
 extension GoalConfirmationViewModel {
+    @MainActor
     static func preview() -> GoalConfirmationViewModel {
         GoalConfirmationViewModel(
             goal: .preview,

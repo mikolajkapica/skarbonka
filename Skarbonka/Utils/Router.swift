@@ -56,6 +56,7 @@ extension Router {
 // MARK: - Preview Helpers
 #if DEBUG
 extension Router {
+    @MainActor
     static func preview() -> Router {
         Router(modelContext: ModelContext(DataController.previewContainer))
     }

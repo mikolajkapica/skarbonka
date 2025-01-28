@@ -53,6 +53,7 @@ private extension GoalSummaryViewModel {
 // MARK: - Preview Helpers
 #if DEBUG
 extension GoalSummaryViewModel {
+    @MainActor
     static func preview() -> GoalSummaryViewModel {
         GoalSummaryViewModel(
             goal: .preview,
@@ -60,6 +61,7 @@ extension GoalSummaryViewModel {
         )
     }
     
+    @MainActor
     static func previewCompleted() -> GoalSummaryViewModel {
         GoalSummaryViewModel(
             goal: .previewCompleted,
