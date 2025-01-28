@@ -61,10 +61,3 @@ private extension GoalConfirmationViewModel {
         return dateFormatter.string(from: date)
     }
 }
-
-// MARK: - Preview Helpers
-#Preview {
-    let goal = generateRandomGoal()
-    let modelContext = ModelContext()
-    return GoalConfirmationViewModel(goal: goal, modelContext: modelContext)
-}

@@ -92,8 +92,3 @@ private extension GoalFormViewModel {
         value >= 0
     }
 }
-
-// MARK: - Preview Helpers
-#Preview {
-    GoalFormViewModel()
-}

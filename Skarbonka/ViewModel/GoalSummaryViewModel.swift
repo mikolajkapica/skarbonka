@@ -49,10 +49,3 @@ private extension GoalSummaryViewModel {
         Float(saved) / Float(price)
     }
 }
-
-// MARK: - Preview Helpers
-#Preview {
-    let goal = generateRandomGoal()
-    let modelContext = ModelContext()
-    return GoalSummaryViewModel(goal: goal, modelContext: modelContext)
-}
